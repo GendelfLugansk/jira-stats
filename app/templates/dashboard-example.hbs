@@ -1,0 +1,346 @@
+<div class="uk-offcanvas-content">
+  <!--HEADER-->
+  <header id="top-head" class="uk-position-fixed">
+    <div class="uk-container uk-container-expand uk-background-primary">
+      <nav class="uk-navbar uk-light" data-uk-navbar="mode:click; duration: 250">
+        <div class="uk-navbar-left">
+          <div class="uk-navbar-item uk-hidden@m">
+            <a class="uk-logo" href="#"><img class="custom-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDY0IDY0OyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgNjQgNjQiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzYyQkVFNzt9Cgkuc3Qxe2ZpbGw6IzQ3NEU1RTt9Cgkuc3Qye2ZpbGw6I0YzRUVFNDt9Cgkuc3Qze2ZpbGw6I0ZGRkZGRjt9Cgkuc3Q0e2ZpbGw6I0U4RENDQTt9Cgkuc3Q1e29wYWNpdHk6MC4xO2ZpbGw6IzIzMUYyMDt9Cgkuc3Q2e2ZpbGw6IzUwNjI2ODt9Cgkuc3Q3e2ZpbGw6I0VCNTE1MTt9Cgkuc3Q4e2ZpbGw6I0M2NDQ0NDt9Cgkuc3Q5e2ZpbGw6IzlDQ0I1Qjt9Cgkuc3QxMHtmaWxsOiM0MDRBNEM7fQoJLnN0MTF7ZmlsbDojNjc2NzY3O30KCS5zdDEye2ZpbGw6I0UwRTFFNTt9Cgkuc3QxM3tmaWxsOiM5RDlFQTA7fQoJLnN0MTR7ZmlsbDojQjNCNEI3O30KCS5zdDE1e29wYWNpdHk6MC4xO30KCS5zdDE2e2ZpbGw6IzIzMUYyMDt9Cgkuc3QxN3tmaWxsOiNGQUNDMjA7fQoJLnN0MTh7ZmlsbDojRkRFRjM0O30KCS5zdDE5e2ZpbGw6I0Y3QTkwQjt9Cgkuc3QyMHtmaWxsOiMyMEI4RUE7fQoJLnN0MjF7ZmlsbDojMDBBOEVBO30KCS5zdDIye2ZpbGw6IzMzRDNGNDt9Cgkuc3QyM3tvcGFjaXR5OjAuMjU7ZmlsbDojRkZGRkZGO30KCS5zdDI0e2ZpbGw6I0NBQ0JDRTt9Cgkuc3QyNXtmaWxsOiMyRTM1NDU7fQoJLnN0MjZ7ZmlsbDojOERBRjRBO30KCS5zdDI3e2ZpbGw6I0Y5QzJBRjt9Cgkuc3QyOHtmaWxsOiNBRkRERjQ7fQoJLnN0Mjl7ZmlsbDojNjc3MTc3O30KCS5zdDMwe2ZpbGw6I0ZGRURCMzt9Cgkuc3QzMXtmaWxsOiM2OTU2NTI7fQoJLnN0MzJ7ZmlsbDojMzBBN0JGO30KCS5zdDMze2ZpbGw6IzRENTU1Njt9Cgkuc3QzNHtvcGFjaXR5OjAuMzU7fQoJLnN0MzV7ZmlsbDojRkZDQjA0O30KCS5zdDM2e2ZpbGw6Izk5RTlGQTt9Cgkuc3QzN3tvcGFjaXR5OjAuMjt9Cgkuc3QzOHtvcGFjaXR5OjMuMDAwMDAwZS0wMjt9Cgkuc3QzOXtmaWxsOiM5RUNBNUI7fQoJLnN0NDB7ZmlsbDojOThCQTU2O30KCS5zdDQxe2ZpbGw6IzQwRUVGRjt9Cgkuc3Q0MntmaWxsOiNGRjZBNTI7fQoJLnN0NDN7b3BhY2l0eTowLjE7ZmlsbDojRkZGRkZGO30KCS5zdDQ0e29wYWNpdHk6MC40O30KCS5zdDQ1e2ZpbGw6IzU3NjA2RDt9Cgkuc3Q0NntmaWxsOiNCQUNBNUI7fQoJLnN0NDd7b3BhY2l0eTowLjI1O30KCS5zdDQ4e29wYWNpdHk6NS4wMDAwMDBlLTAyO2ZpbGw6IzIzMUYyMDt9Cgkuc3Q0OXtvcGFjaXR5OjAuMjtmaWxsOiNGRkZGRkY7fQoJLnN0NTB7b3BhY2l0eTowLjM7fQoJLnN0NTF7ZmlsbDojRkZEODJGO30KCS5zdDUye2ZpbGw6I0Y0QzEyMTt9Cgkuc3Q1M3tmaWxsOiNFRjlEMEE7fQoJLnN0NTR7ZmlsbDojRjlFNTMyO30KCS5zdDU1e2ZpbGw6I0Y0QzAxRTt9Cgkuc3Q1NntmaWxsOiNGRkUxNEQ7fQoJLnN0NTd7ZmlsbDojQjdDMTU2O30KCS5zdDU4e2ZpbGw6I0RCQTkyQzt9Cgkuc3Q1OXtmaWxsOiMzNjNENEQ7fQoJLnN0NjB7ZmlsbDojM0Y0NjU2O30KCS5zdDYxe2ZpbGw6IzQ2M0UzMzt9Cgkuc3Q2MntmaWxsOm5vbmU7fQoJLnN0NjN7b3BhY2l0eTo0LjAwMDAwMGUtMDI7fQoJLnN0NjR7ZmlsbDojNERCNkFDO30KCS5zdDY1e2ZpbGw6I0NBREU0OTt9Cgkuc3Q2NntmaWxsOiM5RkQzNDM7fQoJLnN0Njd7ZmlsbDojQUFENjQzO30KCS5zdDY4e2ZpbGw6IzgyQzczNjt9Cgkuc3Q2OXtvcGFjaXR5OjAuMztmaWxsOiNGRkZGRkY7fQoJLnN0NzB7ZmlsbDojRkZENjQwO30KCS5zdDcxe29wYWNpdHk6MC41O30KCS5zdDcye29wYWNpdHk6MC42O30KPC9zdHlsZT48Zz48Y2lyY2xlIGNsYXNzPSJzdDIxIiBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiLz48Zz48cmVjdCBjbGFzcz0ic3QyIiBoZWlnaHQ9IjMwLjIiIHdpZHRoPSI0NC41IiB4PSI5LjciIHk9IjEyLjYiLz48cmVjdCBjbGFzcz0ic3Q1IiBoZWlnaHQ9IjI1LjIiIHdpZHRoPSIzOS42IiB4PSIxMi44IiB5PSIxNS43Ii8+PHJlY3QgY2xhc3M9InN0NzAiIGhlaWdodD0iMi45IiB3aWR0aD0iMTcuMiIgeD0iMjMuNCIgeT0iOS43Ii8+PHJlY3QgY2xhc3M9InN0NTgiIGhlaWdodD0iMi45IiB3aWR0aD0iMjQuNCIgeD0iMTkuOCIgeT0iNDcuMSIvPjxyZWN0IGNsYXNzPSJzdDMwIiBoZWlnaHQ9IjExLjUiIHRyYW5zZm9ybT0ibWF0cml4KC0xIC0xLjIyNDY0N2UtMTYgMS4yMjQ2NDdlLTE2IC0xIDM1LjI3MzUgOTcuMDMzMykiIHdpZHRoPSI0LjMiIHg9IjE1LjUiIHk9IjQyLjgiLz48cmVjdCBjbGFzcz0ic3Q3MCIgaGVpZ2h0PSIxMS41IiB0cmFuc2Zvcm09Im1hdHJpeCgtMSAtMS4yMjQ2NDdlLTE2IDEuMjI0NjQ3ZS0xNiAtMSA5Mi43MzIxIDk3LjAzMzMpIiB3aWR0aD0iNC4zIiB4PSI0NC4yIiB5PSI0Mi44Ii8+PHJlY3QgY2xhc3M9InN0NzAiIGhlaWdodD0iMTEuNSIgdHJhbnNmb3JtPSJtYXRyaXgoLTEgLTEuMjI0NjQ3ZS0xNiAxLjIyNDY0N2UtMTYgLTEgMzUuMjczNSA5Ny4wMzMzKSIgd2lkdGg9IjQuMyIgeD0iMTUuNSIgeT0iNDIuOCIvPjxyZWN0IGNsYXNzPSJzdDMiIGhlaWdodD0iMjUuMiIgd2lkdGg9IjM5LjYiIHg9IjEyLjIiIHk9IjE1LjEiLz48Zz48Zz48cG9seWdvbiBjbGFzcz0ic3QxMiIgcG9pbnRzPSIzMy4xLDI2IDMyLjQsMjUuNCAzOC43LDE5LjEgNDMsMjMuNSA0OC42LDE3LjkgNDkuMiwxOC41IDQzLDI0LjcgMzguNywyMC40ICAgICAiLz48L2c+PGNpcmNsZSBjbGFzcz0ic3Q3IiBjeD0iMzIuNyIgY3k9IjI1LjciIHI9IjEuNCIvPjxjaXJjbGUgY2xhc3M9InN0NyIgY3g9IjM4LjYiIGN5PSIxOS44IiByPSIxLjQiLz48Y2lyY2xlIGNsYXNzPSJzdDciIGN4PSI0MyIgY3k9IjI0LjEiIHI9IjEuNCIvPjxjaXJjbGUgY2xhc3M9InN0NyIgY3g9IjQ4LjkiIGN5PSIxOC4yIiByPSIxLjQiLz48L2c+PGc+PHJlY3QgY2xhc3M9InN0MjQiIGhlaWdodD0iMS42IiB3aWR0aD0iMTMuNCIgeD0iMTYuMiIgeT0iMjkuNyIvPjxyZWN0IGNsYXNzPSJzdDI0IiBoZWlnaHQ9IjEuNiIgd2lkdGg9IjEzLjQiIHg9IjE2LjIiIHk9IjMzLjEiLz48L2c+PGc+PHJlY3QgY2xhc3M9InN0MjQiIGhlaWdodD0iMS42IiB3aWR0aD0iMTMuNCIgeD0iMTYuMiIgeT0iMzYuNSIvPjwvZz48Zz48cmVjdCBjbGFzcz0ic3QxIiBoZWlnaHQ9IjEuNiIgd2lkdGg9IjEuMiIgeD0iMTQuMSIgeT0iMjkuNyIvPjxyZWN0IGNsYXNzPSJzdDEiIGhlaWdodD0iMS42IiB3aWR0aD0iMS4yIiB4PSIxNC4xIiB5PSIzMy4xIi8+PC9nPjxnPjxyZWN0IGNsYXNzPSJzdDEiIGhlaWdodD0iMS42IiB3aWR0aD0iMS4yIiB4PSIxNC4xIiB5PSIzNi41Ii8+PC9nPjwvZz48L2c+PC9zdmc+" alt=""></a>
+          </div>
+          <ul class="uk-navbar-nav uk-visible@m">
+            <li><a href="#">Accounts</a></li>
+            <li>
+              <a href="#">Settings <span data-uk-icon="icon: triangle-down"></span></a>
+              <div class="uk-navbar-dropdown">
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                  <li class="uk-nav-header">YOUR ACCOUNT</li>
+                  <li><a href="#"><span data-uk-icon="icon: info"></span> Summary</a></li>
+                  <li><a href="#"><span data-uk-icon="icon: refresh"></span> Edit</a></li>
+                  <li><a href="#"><span data-uk-icon="icon: settings"></span> Configuration</a></li>
+                  <li class="uk-nav-divider"></li>
+                  <li><a href="#"><span data-uk-icon="icon: image"></span> Your Data</a></li>
+                  <li class="uk-nav-divider"></li>
+                  <li><a href="#"><span data-uk-icon="icon: sign-out"></span> Logout</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <div class="uk-navbar-item uk-visible@s">
+            <form action="dashboard.html" class="uk-search uk-search-default">
+              <span data-uk-search-icon></span>
+              <input class="uk-search-input search-field" type="search" placeholder="Search">
+            </form>
+          </div>
+        </div>
+        <div class="uk-navbar-right">
+          <ul class="uk-navbar-nav">
+            <li><a href="#" data-uk-icon="icon:user" title="Your profile" data-uk-tooltip></a></li>
+            <li><a href="#" data-uk-icon="icon: settings" title="Settings" data-uk-tooltip></a></li>
+            <li><a href="#" data-uk-icon="icon:  sign-out" title="Sign Out" data-uk-tooltip></a></li>
+            <li><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"
+                   title="Offcanvas" data-uk-tooltip></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!--/HEADER-->
+  <!-- LEFT BAR -->
+  <aside id="left-col" class="uk-light uk-visible@m">
+    <div class="left-logo uk-flex uk-flex-middle">
+      <img class="custom-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDY0IDY0OyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgNjQgNjQiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzYyQkVFNzt9Cgkuc3Qxe2ZpbGw6IzQ3NEU1RTt9Cgkuc3Qye2ZpbGw6I0YzRUVFNDt9Cgkuc3Qze2ZpbGw6I0ZGRkZGRjt9Cgkuc3Q0e2ZpbGw6I0U4RENDQTt9Cgkuc3Q1e29wYWNpdHk6MC4xO2ZpbGw6IzIzMUYyMDt9Cgkuc3Q2e2ZpbGw6IzUwNjI2ODt9Cgkuc3Q3e2ZpbGw6I0VCNTE1MTt9Cgkuc3Q4e2ZpbGw6I0M2NDQ0NDt9Cgkuc3Q5e2ZpbGw6IzlDQ0I1Qjt9Cgkuc3QxMHtmaWxsOiM0MDRBNEM7fQoJLnN0MTF7ZmlsbDojNjc2NzY3O30KCS5zdDEye2ZpbGw6I0UwRTFFNTt9Cgkuc3QxM3tmaWxsOiM5RDlFQTA7fQoJLnN0MTR7ZmlsbDojQjNCNEI3O30KCS5zdDE1e29wYWNpdHk6MC4xO30KCS5zdDE2e2ZpbGw6IzIzMUYyMDt9Cgkuc3QxN3tmaWxsOiNGQUNDMjA7fQoJLnN0MTh7ZmlsbDojRkRFRjM0O30KCS5zdDE5e2ZpbGw6I0Y3QTkwQjt9Cgkuc3QyMHtmaWxsOiMyMEI4RUE7fQoJLnN0MjF7ZmlsbDojMDBBOEVBO30KCS5zdDIye2ZpbGw6IzMzRDNGNDt9Cgkuc3QyM3tvcGFjaXR5OjAuMjU7ZmlsbDojRkZGRkZGO30KCS5zdDI0e2ZpbGw6I0NBQ0JDRTt9Cgkuc3QyNXtmaWxsOiMyRTM1NDU7fQoJLnN0MjZ7ZmlsbDojOERBRjRBO30KCS5zdDI3e2ZpbGw6I0Y5QzJBRjt9Cgkuc3QyOHtmaWxsOiNBRkRERjQ7fQoJLnN0Mjl7ZmlsbDojNjc3MTc3O30KCS5zdDMwe2ZpbGw6I0ZGRURCMzt9Cgkuc3QzMXtmaWxsOiM2OTU2NTI7fQoJLnN0MzJ7ZmlsbDojMzBBN0JGO30KCS5zdDMze2ZpbGw6IzRENTU1Njt9Cgkuc3QzNHtvcGFjaXR5OjAuMzU7fQoJLnN0MzV7ZmlsbDojRkZDQjA0O30KCS5zdDM2e2ZpbGw6Izk5RTlGQTt9Cgkuc3QzN3tvcGFjaXR5OjAuMjt9Cgkuc3QzOHtvcGFjaXR5OjMuMDAwMDAwZS0wMjt9Cgkuc3QzOXtmaWxsOiM5RUNBNUI7fQoJLnN0NDB7ZmlsbDojOThCQTU2O30KCS5zdDQxe2ZpbGw6IzQwRUVGRjt9Cgkuc3Q0MntmaWxsOiNGRjZBNTI7fQoJLnN0NDN7b3BhY2l0eTowLjE7ZmlsbDojRkZGRkZGO30KCS5zdDQ0e29wYWNpdHk6MC40O30KCS5zdDQ1e2ZpbGw6IzU3NjA2RDt9Cgkuc3Q0NntmaWxsOiNCQUNBNUI7fQoJLnN0NDd7b3BhY2l0eTowLjI1O30KCS5zdDQ4e29wYWNpdHk6NS4wMDAwMDBlLTAyO2ZpbGw6IzIzMUYyMDt9Cgkuc3Q0OXtvcGFjaXR5OjAuMjtmaWxsOiNGRkZGRkY7fQoJLnN0NTB7b3BhY2l0eTowLjM7fQoJLnN0NTF7ZmlsbDojRkZEODJGO30KCS5zdDUye2ZpbGw6I0Y0QzEyMTt9Cgkuc3Q1M3tmaWxsOiNFRjlEMEE7fQoJLnN0NTR7ZmlsbDojRjlFNTMyO30KCS5zdDU1e2ZpbGw6I0Y0QzAxRTt9Cgkuc3Q1NntmaWxsOiNGRkUxNEQ7fQoJLnN0NTd7ZmlsbDojQjdDMTU2O30KCS5zdDU4e2ZpbGw6I0RCQTkyQzt9Cgkuc3Q1OXtmaWxsOiMzNjNENEQ7fQoJLnN0NjB7ZmlsbDojM0Y0NjU2O30KCS5zdDYxe2ZpbGw6IzQ2M0UzMzt9Cgkuc3Q2MntmaWxsOm5vbmU7fQoJLnN0NjN7b3BhY2l0eTo0LjAwMDAwMGUtMDI7fQoJLnN0NjR7ZmlsbDojNERCNkFDO30KCS5zdDY1e2ZpbGw6I0NBREU0OTt9Cgkuc3Q2NntmaWxsOiM5RkQzNDM7fQoJLnN0Njd7ZmlsbDojQUFENjQzO30KCS5zdDY4e2ZpbGw6IzgyQzczNjt9Cgkuc3Q2OXtvcGFjaXR5OjAuMztmaWxsOiNGRkZGRkY7fQoJLnN0NzB7ZmlsbDojRkZENjQwO30KCS5zdDcxe29wYWNpdHk6MC41O30KCS5zdDcye29wYWNpdHk6MC42O30KPC9zdHlsZT48Zz48Y2lyY2xlIGNsYXNzPSJzdDIxIiBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiLz48Zz48cmVjdCBjbGFzcz0ic3QyIiBoZWlnaHQ9IjMwLjIiIHdpZHRoPSI0NC41IiB4PSI5LjciIHk9IjEyLjYiLz48cmVjdCBjbGFzcz0ic3Q1IiBoZWlnaHQ9IjI1LjIiIHdpZHRoPSIzOS42IiB4PSIxMi44IiB5PSIxNS43Ii8+PHJlY3QgY2xhc3M9InN0NzAiIGhlaWdodD0iMi45IiB3aWR0aD0iMTcuMiIgeD0iMjMuNCIgeT0iOS43Ii8+PHJlY3QgY2xhc3M9InN0NTgiIGhlaWdodD0iMi45IiB3aWR0aD0iMjQuNCIgeD0iMTkuOCIgeT0iNDcuMSIvPjxyZWN0IGNsYXNzPSJzdDMwIiBoZWlnaHQ9IjExLjUiIHRyYW5zZm9ybT0ibWF0cml4KC0xIC0xLjIyNDY0N2UtMTYgMS4yMjQ2NDdlLTE2IC0xIDM1LjI3MzUgOTcuMDMzMykiIHdpZHRoPSI0LjMiIHg9IjE1LjUiIHk9IjQyLjgiLz48cmVjdCBjbGFzcz0ic3Q3MCIgaGVpZ2h0PSIxMS41IiB0cmFuc2Zvcm09Im1hdHJpeCgtMSAtMS4yMjQ2NDdlLTE2IDEuMjI0NjQ3ZS0xNiAtMSA5Mi43MzIxIDk3LjAzMzMpIiB3aWR0aD0iNC4zIiB4PSI0NC4yIiB5PSI0Mi44Ii8+PHJlY3QgY2xhc3M9InN0NzAiIGhlaWdodD0iMTEuNSIgdHJhbnNmb3JtPSJtYXRyaXgoLTEgLTEuMjI0NjQ3ZS0xNiAxLjIyNDY0N2UtMTYgLTEgMzUuMjczNSA5Ny4wMzMzKSIgd2lkdGg9IjQuMyIgeD0iMTUuNSIgeT0iNDIuOCIvPjxyZWN0IGNsYXNzPSJzdDMiIGhlaWdodD0iMjUuMiIgd2lkdGg9IjM5LjYiIHg9IjEyLjIiIHk9IjE1LjEiLz48Zz48Zz48cG9seWdvbiBjbGFzcz0ic3QxMiIgcG9pbnRzPSIzMy4xLDI2IDMyLjQsMjUuNCAzOC43LDE5LjEgNDMsMjMuNSA0OC42LDE3LjkgNDkuMiwxOC41IDQzLDI0LjcgMzguNywyMC40ICAgICAiLz48L2c+PGNpcmNsZSBjbGFzcz0ic3Q3IiBjeD0iMzIuNyIgY3k9IjI1LjciIHI9IjEuNCIvPjxjaXJjbGUgY2xhc3M9InN0NyIgY3g9IjM4LjYiIGN5PSIxOS44IiByPSIxLjQiLz48Y2lyY2xlIGNsYXNzPSJzdDciIGN4PSI0MyIgY3k9IjI0LjEiIHI9IjEuNCIvPjxjaXJjbGUgY2xhc3M9InN0NyIgY3g9IjQ4LjkiIGN5PSIxOC4yIiByPSIxLjQiLz48L2c+PGc+PHJlY3QgY2xhc3M9InN0MjQiIGhlaWdodD0iMS42IiB3aWR0aD0iMTMuNCIgeD0iMTYuMiIgeT0iMjkuNyIvPjxyZWN0IGNsYXNzPSJzdDI0IiBoZWlnaHQ9IjEuNiIgd2lkdGg9IjEzLjQiIHg9IjE2LjIiIHk9IjMzLjEiLz48L2c+PGc+PHJlY3QgY2xhc3M9InN0MjQiIGhlaWdodD0iMS42IiB3aWR0aD0iMTMuNCIgeD0iMTYuMiIgeT0iMzYuNSIvPjwvZz48Zz48cmVjdCBjbGFzcz0ic3QxIiBoZWlnaHQ9IjEuNiIgd2lkdGg9IjEuMiIgeD0iMTQuMSIgeT0iMjkuNyIvPjxyZWN0IGNsYXNzPSJzdDEiIGhlaWdodD0iMS42IiB3aWR0aD0iMS4yIiB4PSIxNC4xIiB5PSIzMy4xIi8+PC9nPjxnPjxyZWN0IGNsYXNzPSJzdDEiIGhlaWdodD0iMS42IiB3aWR0aD0iMS4yIiB4PSIxNC4xIiB5PSIzNi41Ii8+PC9nPjwvZz48L2c+PC9zdmc+" alt="">
+    </div>
+    <div class="left-content-box  content-box-dark">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgZGF0YS1uYW1lPSJMaXZlbGxvIDEiIGlkPSJMaXZlbGxvXzEiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6bm9uZTtzdHJva2U6I2ZmZjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDtzdHJva2Utd2lkdGg6MnB4O308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxwYXRoIGQ9Ik0wLDMyQTMyLDMyLDAsMSwwLDMyLDAsMzIsMzIsMCwwLDAsMCwzMloiLz48ZyBpZD0iVXNlciI+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDYsNDIuMTh2NS45MWEwLjkxLDAuOTEsMCwwLDEtLjkuOTFIMThhMC45MSwwLjkxLDAsMCwxLS45LTAuOTFWNDIuMThjMC00Ljc3LDYuNDctOC42NCwxNC40NS04LjY0UzQ2LDM3LjQxLDQ2LDQyLjE4WiIvPjxlbGxpcHNlIGNsYXNzPSJjbHMtMSIgY3g9IjMxLjU1IiBjeT0iMjEuMTgiIHJ4PSI2LjQyIiByeT0iNi4xOCIvPjwvZz48L3N2Zz4=" alt="" class="uk-border-circle profile-img">
+      <h4 class="uk-text-center uk-margin-remove-vertical text-light">John Doe</h4>
+
+      <div class="uk-position-relative uk-text-center uk-display-block">
+        <a href="#" class="uk-text-small uk-text-muted uk-display-block uk-text-center"
+           data-uk-icon="icon: triangle-down; ratio: 0.7">Admin</a>
+        <!-- user dropdown -->
+        <div class="uk-dropdown user-drop"
+             data-uk-dropdown="mode: click; pos: bottom-center; animation: uk-animation-slide-bottom-small; duration: 150">
+          <ul class="uk-nav uk-dropdown-nav uk-text-left">
+            <li><a href="#"><span data-uk-icon="icon: info"></span> Summary</a></li>
+            <li><a href="#"><span data-uk-icon="icon: refresh"></span> Edit</a></li>
+            <li><a href="#"><span data-uk-icon="icon: settings"></span> Configuration</a></li>
+            <li class="uk-nav-divider"></li>
+            <li><a href="#"><span data-uk-icon="icon: image"></span> Your Data</a></li>
+            <li class="uk-nav-divider"></li>
+            <li><a href="#"><span data-uk-icon="icon: sign-out"></span> Sign Out</a></li>
+          </ul>
+        </div>
+        <!-- /user dropdown -->
+      </div>
+    </div>
+
+    <div class="left-nav-wrap">
+      <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
+        <li class="uk-nav-header">ACTIONS</li>
+        <li><a href="#"><span data-uk-icon="icon: comments" class="uk-margin-small-right"></span>Messages</a></li>
+        <li><a href="#"><span data-uk-icon="icon: users" class="uk-margin-small-right"></span>Friends</a></li>
+        <li class="uk-parent"><a href="#"><span data-uk-icon="icon: thumbnails" class="uk-margin-small-right"></span>Rooms</a>
+          <ul class="uk-nav-sub">
+            <li><a href="#">Ipsum Dolor</a></li>
+            <li><a href="#">Officia deserunt</a></li>
+            <li><a href="#">Duis aute irure</a></li>
+            <li><a href="#">Ut enim ad minim</a></li>
+          </ul>
+        </li>
+        <li><a href="#"><span data-uk-icon="icon: album" class="uk-margin-small-right"></span>Albums</a></li>
+        <li><a href="#"><span data-uk-icon="icon: thumbnails" class="uk-margin-small-right"></span>Featured Content</a>
+        </li>
+        <li><a href="#"><span data-uk-icon="icon: lifesaver" class="uk-margin-small-right"></span>Tips</a></li>
+        <li class="uk-parent">
+          <a href="#"><span data-uk-icon="icon: comments" class="uk-margin-small-right"></span>Reports</a>
+          <ul class="uk-nav-sub">
+            <li><a href="#">Sub item</a></li>
+            <li><a href="#">Sub item</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="left-content-box uk-margin-top">
+
+        <h5>Daily Reports</h5>
+        <div>
+          <span class="uk-text-small">Traffic
+            <small>(+50)</small>
+          </span>
+          <progress class="uk-progress" value="50" max="100"></progress>
+        </div>
+        <div>
+          <span class="uk-text-small">Income
+            <small>(+78)</small>
+          </span>
+          <progress class="uk-progress success" value="78" max="100"></progress>
+        </div>
+        <div>
+          <span class="uk-text-small">Feedback
+            <small>(-12)</small>
+          </span>
+          <progress class="uk-progress warning" value="12" max="100"></progress>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="bar-bottom">
+      <ul class="uk-subnav uk-flex uk-flex-center uk-child-width-1-5" data-uk-grid>
+        <li>
+          <a href="#" class="uk-icon-link" data-uk-icon="icon: home" title="Home" data-uk-tooltip></a>
+        </li>
+        <li>
+          <a href="#" class="uk-icon-link" data-uk-icon="icon: settings" title="Settings" data-uk-tooltip></a>
+        </li>
+        <li>
+          <a href="#" class="uk-icon-link" data-uk-icon="icon: social" title="Social" data-uk-tooltip></a>
+        </li>
+
+        <li>
+          <a href="#" class="uk-icon-link" data-uk-tooltip="Sign out" data-uk-icon="icon: sign-out"></a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <!-- /LEFT BAR -->
+  <!-- CONTENT -->
+  <div id="content" data-uk-height-viewport="expand: true">
+    <div class="uk-container uk-container-expand">
+      <div class="uk-grid uk-grid-divider uk-grid-medium uk-child-width-1-2 uk-child-width-1-4@l uk-child-width-1-5@xl"
+           data-uk-grid>
+        <div>
+          <span class="uk-text-small"><span data-uk-icon="icon:users"
+                                            class="uk-margin-small-right uk-text-primary"></span>New Users</span>
+          <h1 class="uk-heading-primary uk-margin-remove  uk-text-primary">2.134</h1>
+          <div class="uk-text-small">
+            <span class="uk-text-success" data-uk-icon="icon: triangle-up">15%</span> more than last week.
+          </div>
+        </div>
+        <div>
+
+          <span class="uk-text-small"><span data-uk-icon="icon:social"
+                                            class="uk-margin-small-right uk-text-primary"></span>Social Media</span>
+          <h1 class="uk-heading-primary uk-margin-remove uk-text-primary">8.490</h1>
+          <div class="uk-text-small">
+            <span class="uk-text-warning" data-uk-icon="icon: triangle-down">-15%</span> less than last week.
+          </div>
+
+        </div>
+        <div>
+
+          <span class="uk-text-small"><span data-uk-icon="icon:clock"
+                                            class="uk-margin-small-right uk-text-primary"></span>Traffic hours</span>
+          <h1 class="uk-heading-primary uk-margin-remove uk-text-primary">12.00
+            <small class="uk-text-small">PM</small>
+          </h1>
+          <div class="uk-text-small">
+            <span class="uk-text-success" data-uk-icon="icon: triangle-up"> 19%</span> more than last week.
+          </div>
+
+        </div>
+        <div>
+
+          <span class="uk-text-small"><span data-uk-icon="icon:search"
+                                            class="uk-margin-small-right uk-text-primary"></span>Week Search</span>
+          <h1 class="uk-heading-primary uk-margin-remove uk-text-primary">9.543</h1>
+          <div class="uk-text-small">
+            <span class="uk-text-danger" data-uk-icon="icon: triangle-down"> -23%</span> less than last week.
+          </div>
+
+        </div>
+        <div class="uk-visible@xl">
+          <span class="uk-text-small"><span data-uk-icon="icon:users"
+                                            class="uk-margin-small-right uk-text-primary"></span>Lorem ipsum</span>
+          <h1 class="uk-heading-primary uk-margin-remove uk-text-primary">5.284</h1>
+          <div class="uk-text-small">
+            <span class="uk-text-success" data-uk-icon="icon: triangle-up"> 7%</span> more than last week.
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="uk-grid uk-grid-medium" data-uk-grid>
+
+        <!-- panel -->
+        <div class="uk-width-1-2@l">
+          <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+            <div class="uk-card-header">
+              <div class="uk-grid uk-grid-small">
+                <div class="uk-width-auto"><h4>Sales Chart</h4></div>
+                <div class="uk-width-expand uk-text-right panel-icons">
+                  <a href="#" class="uk-icon-link" title="Move" data-uk-tooltip data-uk-icon="icon: move"></a>
+                  <a href="#" class="uk-icon-link" title="Configuration" data-uk-tooltip data-uk-icon="icon: cog"></a>
+                  <a href="#" class="uk-icon-link" title="Close" data-uk-tooltip data-uk-icon="icon: close"></a>
+                </div>
+              </div>
+            </div>
+            <div class="uk-card-body">
+              <div class="chart-container">
+                <canvas id="chart2"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /panel -->
+        <!-- panel -->
+        <div class="uk-width-1-2@l">
+          <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+            <div class="uk-card-header">
+              <div class="uk-grid uk-grid-small">
+                <div class="uk-width-auto"><h4>Predictions Chart</h4></div>
+                <div class="uk-width-expand uk-text-right panel-icons">
+                  <a href="#" class="uk-icon-link" title="Move" data-uk-tooltip data-uk-icon="icon: move"></a>
+                  <a href="#" class="uk-icon-link" title="Configuration" data-uk-tooltip data-uk-icon="icon: cog"></a>
+                  <a href="#" class="uk-icon-link" title="Close" data-uk-tooltip data-uk-icon="icon: close"></a>
+                </div>
+              </div>
+            </div>
+            <div class="uk-card-body">
+              <div class="chart-container">
+                <canvas id="chart1"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /panel -->
+        <!-- panel -->
+        <div class="uk-width-1-1 uk-width-1-3@l uk-width-1-2@xl">
+          <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+            <div class="uk-card-header">
+              <div class="uk-grid uk-grid-small">
+                <div class="uk-width-auto"><h4>Activity Chart</h4></div>
+                <div class="uk-width-expand uk-text-right panel-icons">
+                  <a href="#" class="uk-icon-link" title="Move" data-uk-tooltip data-uk-icon="icon: move"></a>
+                  <a href="#" class="uk-icon-link" title="Configuration" data-uk-tooltip data-uk-icon="icon: cog"></a>
+                  <a href="#" class="uk-icon-link" title="Close" data-uk-tooltip data-uk-icon="icon: close"></a>
+                </div>
+              </div>
+            </div>
+            <div class="uk-card-body">
+              <div class="chart-container">
+                <canvas id="chart3"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /panel -->
+        <!-- panel -->
+        <div class="uk-width-1-2@s uk-width-1-3@l uk-width-1-4@xl">
+          <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+            <div class="uk-card-header">
+              <div class="uk-grid uk-grid-small">
+                <div class="uk-width-auto"><h4>Distribution Chart</h4></div>
+                <div class="uk-width-expand uk-text-right panel-icons">
+                  <a href="#" class="uk-icon-link" title="Move" data-uk-tooltip data-uk-icon="icon: move"></a>
+                  <a href="#" class="uk-icon-link" title="Configuration" data-uk-tooltip data-uk-icon="icon: cog"></a>
+                  <a href="#" class="uk-icon-link" title="Close" data-uk-tooltip data-uk-icon="icon: close"></a>
+                </div>
+              </div>
+            </div>
+            <div class="uk-card-body">
+              <div class="chart-container">
+                <canvas id="chart4"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /panel -->
+        <!-- panel -->
+        <div class="uk-width-1-2@s uk-width-1-3@l uk-width-1-4@xl">
+          <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+            <div class="uk-card-header">
+              <div class="uk-grid uk-grid-small">
+                <div class="uk-width-auto"><h4>Population Chart</h4></div>
+                <div class="uk-width-expand uk-text-right panel-icons">
+                  <a href="#" class="uk-icon-link" title="Move" data-uk-tooltip data-uk-icon="icon: move"></a>
+                  <a href="#" class="uk-icon-link" title="Configuration" data-uk-tooltip data-uk-icon="icon: cog"></a>
+                  <a href="#" class="uk-icon-link" title="Close" data-uk-tooltip data-uk-icon="icon: close"></a>
+                </div>
+              </div>
+            </div>
+            <div class="uk-card-body">
+              <div class="chart-container">
+                <canvas id="chart5"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /panel -->
+      </div>
+      <footer class="uk-section uk-section-small uk-text-center">
+        <hr>
+        <p class="uk-text-small uk-text-center">Copyright 2018 - <a href="https://github.com/zzseba78/Kick-Off">Created
+          by KickOff</a> | Built with <a href="http://getuikit.com" title="Visit UIkit 3 site" target="_blank"
+                                         data-uk-tooltip><span data-uk-icon="uikit"></span></a></p>
+      </footer>
+    </div>
+  </div>
+  <!-- /CONTENT -->
+  <!-- OFFCANVAS -->
+  <div id="offcanvas-nav" data-uk-offcanvas="flip: true; overlay: true">
+    <div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
+      <button class="uk-offcanvas-close uk-close uk-icon" type="button" data-uk-close></button>
+      <ul class="uk-nav uk-nav-default">
+        <li class="uk-active"><a href="#">Active</a></li>
+        <li class="uk-parent">
+          <a href="#">Parent</a>
+          <ul class="uk-nav-sub">
+            <li><a href="#">Sub item</a></li>
+            <li><a href="#">Sub item</a></li>
+          </ul>
+        </li>
+        <li class="uk-nav-header">Header</li>
+        <li><a href="#js-options"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: table"></span>
+          Item</a></li>
+        <li><a href="#"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: thumbnails"></span> Item</a>
+        </li>
+        <li class="uk-nav-divider"></li>
+        <li><a href="#"><span class="uk-margin-small-right uk-icon" data-uk-icon="icon: trash"></span> Item</a></li>
+      </ul>
+      <h3>Title</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.</p>
+    </div>
+  </div>
+  <!-- /OFFCANVAS -->
+</div>

@@ -1,0 +1,40 @@
+{{side-nav}}
+<!-- CONTENT -->
+<div id="content" data-uk-height-viewport="expand: true">
+  <div class="uk-container uk-container-expand">
+
+    <div class="uk-grid uk-grid-medium " uk-height-viewport="expand: true" data-uk-grid>
+
+      <!-- panel -->
+      <div class="uk-width-1-1 uk-height-1-1">
+        <div class="uk-card uk-card-default uk-card-small">
+          <div class="uk-card-header">
+            <div class="uk-grid uk-grid-small">
+              <div class="uk-width-auto"><h4>About</h4></div>
+            </div>
+          </div>
+          <div class="uk-card-body">
+            <p>This application has been created to analyze JIRA issues, mainly logged time/estimates</p>
+            <p>How to use:</p>
+            <ol>
+              <li>In JIRA, navigate to Issues and Filters page</li>
+              <li>Apply filters if you want</li>
+              <li>In menu (second icon on top right) choose Export Excel CSV (all fields)</li>
+              <li>Save file to your PC</li>
+              <li>In this app, navigate to Import</li>
+              <li>Import your file</li>
+              <li>Now you can go to List of issues or report</li>
+            </ol>
+            <p>This application does not store your data anywhere in cloud. All data will be lost as soon as you reload
+              page in browser. But this also might lead with performance issues in case of big files.</p>
+          </div>
+        </div>
+      </div>
+      <!-- /panel -->
+
+    </div>
+
+    {{x-footer}}
+  </div>
+</div>
+<!-- /CONTENT -->

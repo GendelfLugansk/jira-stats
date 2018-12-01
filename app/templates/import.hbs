@@ -1,0 +1,38 @@
+{{side-nav}}
+<!-- CONTENT -->
+<div id="content" data-uk-height-viewport="expand: true">
+  <div class="uk-container uk-container-expand">
+
+    <div class="uk-grid uk-grid-medium " uk-height-viewport="expand: true" data-uk-grid>
+
+      <!-- panel -->
+      <div class="uk-width-1-1 uk-height-1-1">
+        <div class="uk-card uk-card-default uk-card-small">
+          <div class="uk-card-header">
+            <div class="uk-grid uk-grid-small">
+              <div class="uk-width-auto"><h4>Import</h4></div>
+            </div>
+          </div>
+          <div class="uk-card-body">
+            {{#file-upload name="photos"
+                           accept="image/*"
+                           as |queue|}}
+              <button class="uk-button uk-button-primary uk-button-large uk-align-center">
+                {{#if queue.files.length}}
+                  Uploading...
+                {{else}}
+                  Upload file
+                {{/if}}
+              </button>
+            {{/file-upload}}
+          </div>
+        </div>
+      </div>
+      <!-- /panel -->
+
+    </div>
+
+    {{x-footer}}
+  </div>
+</div>
+<!-- /CONTENT -->
