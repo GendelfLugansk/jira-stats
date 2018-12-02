@@ -1,0 +1,82 @@
+<div class="uk-card uk-card-default uk-card-small">
+  <div class="uk-card-header">
+    <div class="uk-grid uk-grid-small">
+      <div class="uk-width-auto"><h4>Issues</h4></div>
+    </div>
+  </div>
+  <div class="uk-card-body">
+    {{#if this.issues.length}}
+      <table class="uk-table uk-table-small uk-table-hover uk-table-divider uk-table-responsive">
+        <thead>
+        <tr>
+          <th>issue_key</th>
+          <th>issue_id</th>
+          <th>issue_type</th>
+          <th>summary</th>
+          <th>assignee</th>
+          <th>status</th>
+          <th>sprint</th>
+          <th>time_spent</th>
+          <th>original_estimate</th>
+          <th>work_ratio</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {{#each this.issues as |issue|}}
+          <tr>
+            <td>{{issue.issue_key}}</td>
+            <td>{{issue.issue_id}}</td>
+            <td>{{issue.issue_type}}</td>
+            <td>{{issue.summary}}</td>
+            <td>{{issue.assignee}}</td>
+            <td>{{issue.status}}</td>
+            <td>{{issue.sprint}}</td>
+            <td>{{issue.time_spent}}</td>
+            <td>{{issue.original_estimate}}</td>
+            <td>{{issue.work_ratio}}</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+
+      <div class="uk-margin-medium-top uk-child-width-1-2@s uk-flex-middle" uk-margin uk-grid>
+        <div>
+          <button class="uk-button uk-button-default" type="button">{{issues.meta.pagination.pageSize}} issues per page
+          </button>
+          <div uk-dropdown>
+            <ul class="uk-nav uk-dropdown-nav">
+              {{#each (array 15 20 30 50) as |size|}}
+                <li class="{{if (eq issues.meta.pagination.pageSize size) 'uk-active'}}"><a {{action (mut pageSize)
+                                                                                                     size}}>{{size}}</a>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <ul class="uk-pagination uk-flex-right">
+            {{#if issues.meta.pagination.first}}
+              <li><a {{action (mut page) issues.meta.pagination.first}}>First Page</a></li>
+            {{/if}}
+            {{#each issues.meta.pagination.numbers as |pageNumber|}}
+              <li class="{{if (eq issues.meta.pagination.page pageNumber) 'uk-active'}}"><a {{action (mut page)
+                                                                                                     pageNumber}}>{{pageNumber}}</a>
+              </li>
+            {{/each}}
+            {{#if issues.meta.pagination.last}}
+              <li><a {{action (mut page) issues.meta.pagination.last}}>Last Page</a></li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{else}}
+      {{#if refreshModel.isIdle}}
+        You don't have issues to display. Maybe you want to {{link-to 'Import' 'import'}}?
+      {{else}}
+        Loading issues...
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

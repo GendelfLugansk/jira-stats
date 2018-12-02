@@ -1,7 +1,6 @@
 # jira-stats
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Application to analyze exported JIRA issues
 
 ## Prerequisites
 
@@ -46,7 +45,45 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+Just build and then configure nginx/apache to use dist as site root. Example of
+nginx config below
+
+```
+server {
+    listen 80;
+    server_name jira-stats.domain;
+    return 301 https://$host$request_uri;
+}
+
+server {
+        listen 443 ssl;
+        ssl_certificate /etc/letsencrypt/live/jira-stats.domain/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/jira-stats.domain/privkey.pem;
+        server_name jira-stats.domain;
+        root /path/to/dist;
+
+        location ~ /.well-known {
+                allow all;
+        }
+ 
+        # Deny all . files
+        location ~ /\. {
+                deny all;
+        }
+
+        index index.html
+        access_log off;
+        gzip on;
+        gzip_comp_level 9;
+        gzip_types text/plain text/xml text/css application/x-javascript image/png image/gif image/jpeg image/jpg;
+
+        location / {
+                include /etc/nginx/mime.types;
+                try_files $uri /index.html;
+        }
+}
+
+```
 
 ## Further Reading / Useful Links
 

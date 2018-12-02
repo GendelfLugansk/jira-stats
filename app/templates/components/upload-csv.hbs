@@ -1,0 +1,34 @@
+<div class="uk-card uk-card-default uk-card-small">
+  <div class="uk-card-header">
+    <div class="uk-grid uk-grid-small">
+      <div class="uk-width-auto"><h4>Import</h4></div>
+    </div>
+  </div>
+  <div class="uk-card-body uk-text-center">
+    {{#if upload.last.isError}}
+      <div class="uk-alert-danger" uk-alert onclick={{pipe-action
+        (action (mut upload.last.isError) false)
+        (action (mut upload.last.error) undefined)
+      }}>
+        <p>{{stringify-error upload.last.error}}</p>
+      </div>
+    {{/if}}
+
+    {{#file-upload name=queueName
+                   multiple=false
+                   disabled=(or isQueueFull upload.isRunning)
+                   onfileadd=(perform upload) as |queue|}}
+      <a class="uk-button uk-button-primary uk-button-large">
+        {{#if isQueueFull}}
+          {{#if upload.isRunning}}
+            Parsing...
+          {{else}}
+            Selected
+          {{/if}}
+        {{else}}
+          Select File
+        {{/if}}
+      </a>
+    {{/file-upload}}
+  </div>
+</div>

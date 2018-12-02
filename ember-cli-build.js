@@ -27,5 +27,13 @@ module.exports = function(defaults) {
   app.import('node_modules/uikit/dist/js/uikit.js');
   app.import('node_modules/uikit/dist/js/uikit-icons.js');
 
+  app.import('node_modules/plotly.js/dist/plotly.js', {
+    using: [{ transformation: 'amd', as: 'plotly' }],
+  });
+
+  app.import('node_modules/papaparse/papaparse.js', {
+    using: [{ transformation: 'amd', as: 'papaparse' }],
+  });
+
   return app.toTree();
 };
