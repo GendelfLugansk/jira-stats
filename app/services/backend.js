@@ -149,10 +149,18 @@ export default Service.extend({
     this._columns.setProperties(columns);
   },
 
-  async getIssues(page = 1, pageSize = 15, sort) {
+  async getIssues(page = 1, pageSize = 15, sort, filters) {
+    let result = this.issues.toArray();
+
+    result = this.applyFilters(result, filters);
+
+    if (Array.isArray(sort)) {
+      complexSort(result, sort);
+    }
+
     pageSize = Math.max(15, Math.min(pageSize, 50));
     const maxPage = pageSize
-      ? Math.max(1, Math.ceil(this.issues.length / pageSize))
+      ? Math.max(1, Math.ceil(result.length / pageSize))
       : 1;
     page = Math.max(1, Math.min(page, maxPage));
 
@@ -160,12 +168,6 @@ export default Service.extend({
 
     for (let i = Math.max(1, page - 5); i <= Math.min(maxPage, page + 5); i++) {
       pageNumbers.push(i);
-    }
-
-    let result = this.issues.toArray();
-
-    if (Array.isArray(sort)) {
-      complexSort(result, sort);
     }
 
     result = result.filter(
@@ -178,12 +180,22 @@ export default Service.extend({
         page,
         pageSize,
         numbers: pageNumbers,
-        first: 1,
-        last: maxPage,
+        first: page > 1 ? 1 : undefined,
+        last: page < maxPage ? maxPage : undefined,
+        prev: page > 1 ? page - 1 : undefined,
+        next: page < maxPage ? page + 1 : undefined,
       },
     };
 
     return result;
+  },
+
+  applyFilters(issues) {
+    return issues;
+  },
+
+  datumKeyToName(datumKey) {
+    return aliasesInverted[datumKey] || datumKey;
   },
 
   init() {

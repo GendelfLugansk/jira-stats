@@ -6,19 +6,19 @@
   </div>
   <div class="uk-card-body">
     {{#if this.issues.length}}
-      <table class="uk-table uk-table-small uk-table-hover uk-table-divider uk-table-responsive">
+      <table class="uk-table uk-table-small uk-table-striped uk-table-responsive">
         <thead>
         <tr>
-          <th>issue_key</th>
-          <th>issue_id</th>
-          <th>issue_type</th>
-          <th>summary</th>
-          <th>assignee</th>
-          <th>status</th>
-          <th>sprint</th>
-          <th>time_spent</th>
-          <th>original_estimate</th>
-          <th>work_ratio</th>
+          <th class="uk-table-middle">{{name-for-key 'issue_key'}}</th>
+          <th class="uk-table-middle">{{name-for-key 'issue_id'}}</th>
+          <th class="uk-table-middle">{{name-for-key 'issue_type'}}</th>
+          <th class="uk-table-middle">{{name-for-key 'summary'}}</th>
+          <th class="uk-table-middle">{{name-for-key 'assignee'}}</th>
+          <th class="uk-table-middle">{{name-for-key 'status'}}</th>
+          <th class="uk-table-middle">{{name-for-key 'sprint'}}</th>
+          <th class="uk-table-middle">{{name-for-key 'time_spent'}}</th>
+          <th class="uk-table-middle">{{name-for-key 'original_estimate'}}</th>
+          <th class="uk-table-middle">{{name-for-key 'work_ratio'}}</th>
         </tr>
         </thead>
         <tbody>
@@ -60,11 +60,17 @@
             {{#if issues.meta.pagination.first}}
               <li><a {{action (mut page) issues.meta.pagination.first}}>First Page</a></li>
             {{/if}}
+            {{#if issues.meta.pagination.prev}}
+              <li><a {{action (mut page) issues.meta.pagination.prev}}><span uk-pagination-previous></span></a></li>
+            {{/if}}
             {{#each issues.meta.pagination.numbers as |pageNumber|}}
               <li class="{{if (eq issues.meta.pagination.page pageNumber) 'uk-active'}}"><a {{action (mut page)
                                                                                                      pageNumber}}>{{pageNumber}}</a>
               </li>
             {{/each}}
+            {{#if issues.meta.pagination.next}}
+              <li><a {{action (mut page) issues.meta.pagination.next}}><span uk-pagination-next></span></a></li>
+            {{/if}}
             {{#if issues.meta.pagination.last}}
               <li><a {{action (mut page) issues.meta.pagination.last}}>Last Page</a></li>
             {{/if}}
