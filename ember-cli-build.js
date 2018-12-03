@@ -35,5 +35,7 @@ module.exports = function(defaults) {
     using: [{ transformation: 'amd', as: 'papaparse' }],
   });
 
+  app.import('node_modules/forerunnerdb/js/dist/fdb-all.js');
+
   return app.toTree();
 };

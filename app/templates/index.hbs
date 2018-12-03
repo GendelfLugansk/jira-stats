@@ -40,10 +40,17 @@
             </ol>
 
             <p><strong>App will not work if you have language different from "English (USA)" in personal JIRA
-            settings because this leads to translated column headers in CSV</strong></p>
+            settings &mdash; this leads to translated column headers in CSV</strong></p>
 
-            <p>This application does not store your data anywhere in cloud. All data will be lost as soon as you reload
-              page in browser. But this also might lead with performance issues in case of big files.</p>
+            <h4>Performance</h4>
+
+            <p>App was tested on file containing 1000 issues and on that amount performance is good. I didn't
+            test it with larger amounts. As a precaution, amount of issue this app can process is limited to 50000</p>
+
+            <h4>Security concerns</h4>
+
+            <p>This application stores your data in your browser, in indexedDB. Therefore, data is accessible
+            to people who can access your PC</p>
 
             <p class="uk-text-center">
               {{link-to 'Go to Import' 'import' class="uk-button uk-button-primary uk-button-large"}}

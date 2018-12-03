@@ -1,12 +1,19 @@
 import Service from '@ember/service';
 import Papa from 'papaparse';
 import { Promise as EmberPromise } from 'rsvp';
-import { A } from '@ember/array';
-import ArrayProxy from '@ember/array/proxy';
 import EmberObject from '@ember/object';
 import { readOnly } from '@ember/object/computed';
-import complexSort from 'jira-stats/utils/complex-sort';
 import math from 'npm:mathjs';
+
+/* global ForerunnerDB */
+const fdb = new ForerunnerDB();
+const db = fdb.db('jira-stats-main');
+
+db.persist.addStep(
+  new db.shared.plugins.FdbCrypto({
+    pass: 'You Know Nothing, Jon Snow',
+  })
+);
 
 const aliases = {
   'Affects Version/s': 'affects_versions',
@@ -59,7 +66,6 @@ const ensureMultipleValuesForAliases = [
 
 export default Service.extend({
   columns: readOnly('_columns'),
-  issues: readOnly('_issues'),
 
   async upload(file) {
     const rawCsvArray = await new EmberPromise((resolve, reject) => {
@@ -77,6 +83,15 @@ export default Service.extend({
       return;
     }
 
+    const {
+      issuesCollection,
+      columnsCollection,
+    } = await this.ensureCollections();
+
+    const ensureMultipleValuesForColumnNames = Object.values(this._columns)
+      .filter(col => col.multipleValues)
+      .map(col => col.name);
+
     const rawHeader = rawCsvArray.data.shift();
     const columns = {};
     rawHeader.forEach((columnName, _index) => {
@@ -87,7 +102,8 @@ export default Service.extend({
       if (columns[columnName] === undefined) {
         const forseMultiple =
           aliases[columnName] &&
-          ensureMultipleValuesForAliases.indexOf(aliases[columnName]) > -1;
+          (ensureMultipleValuesForAliases.indexOf(aliases[columnName]) > -1 ||
+            ensureMultipleValuesForColumnNames.indexOf(columnName) > -1);
 
         columns[columnName] = {
           name: columnName,
@@ -124,6 +140,12 @@ export default Service.extend({
         }
       }
 
+      datum._id =
+        datum.issue_id ||
+        datum.issue_key ||
+        datum.created + datum.creator ||
+        undefined;
+
       if (datum.original_estimate !== '' && datum.time_spent !== '') {
         datum.__work_ratio = math.number(
           math.divide(
@@ -136,31 +158,71 @@ export default Service.extend({
       parsedData.push(datum);
     }
 
-    const existingIssueIds = this._issues
-      .map(issue => issue.issue_id)
-      .filter(id => id !== undefined);
-
-    this._issues.addObjects(
-      parsedData.filter(
-        datum => existingIssueIds.indexOf(datum.issue_id) === -1
-      )
-    );
+    await new EmberPromise((resolve, reject) => {
+      try {
+        issuesCollection.upsert(parsedData, resolve);
+      } catch (e) {
+        reject(e);
+      }
+    });
 
     this._columns.setProperties(columns);
+    this._columns.set('_id', this._columns.getWithDefault('_id', 'mainSet'));
+
+    await new EmberPromise((resolve, reject) => {
+      try {
+        columnsCollection.upsert(
+          this._columns.getProperties(...Object.keys(this._columns)),
+          resolve
+        );
+      } catch (e) {
+        reject(e);
+      }
+    });
+
+    await EmberPromise.all([
+      new EmberPromise((resolve, reject) => {
+        issuesCollection.save(err => {
+          if (!err) {
+            return resolve();
+          }
+          reject(err);
+        });
+      }),
+      new EmberPromise((resolve, reject) => {
+        columnsCollection.save(err => {
+          if (!err) {
+            return resolve();
+          }
+          reject(err);
+        });
+      }),
+    ]);
   },
 
-  async getIssues(page = 1, pageSize = 15, sort, filters) {
-    let result = this.issues.toArray();
+  async getIssues(page = 1, pageSize = 15, sort /*, filters*/) {
+    const { issuesCollection } = await this.ensureCollections();
 
-    result = this.applyFilters(result, filters);
+    const opts = {};
 
+    const orders = {};
     if (Array.isArray(sort)) {
-      complexSort(result, sort);
+      sort.forEach(sortBy => {
+        sortBy = Array.isArray(sortBy) ? sortBy : String(sortBy).split('|');
+        if (sortBy.length === 2) {
+          orders[sortBy[0]] = sortBy[1] === 'desc' ? -1 : 1;
+        }
+      });
     }
+    if (Object.keys(orders).length > 0) {
+      opts.$orderBy = orders;
+    }
+
+    const numberOfIssues = issuesCollection.count();
 
     pageSize = Math.max(15, Math.min(pageSize, 50));
     const maxPage = pageSize
-      ? Math.max(1, Math.ceil(result.length / pageSize))
+      ? Math.max(1, Math.ceil(numberOfIssues / pageSize))
       : 1;
     page = Math.max(1, Math.min(page, maxPage));
 
@@ -170,10 +232,17 @@ export default Service.extend({
       pageNumbers.push(i);
     }
 
-    result = result.filter(
-      (issue, index) =>
-        index >= (page - 1) * pageSize && index < page * pageSize
-    );
+    if (
+      typeof pageSize === 'number' &&
+      typeof page === 'number' &&
+      !isNaN(pageSize) &&
+      !isNaN(page)
+    ) {
+      opts.$page = page - 1;
+      opts.$limit = pageSize;
+    }
+
+    const result = issuesCollection.find({}, opts);
 
     result.meta = {
       pagination: {
@@ -190,17 +259,54 @@ export default Service.extend({
     return result;
   },
 
-  applyFilters(issues) {
-    return issues;
-  },
-
   datumKeyToName(datumKey) {
     return aliasesInverted[datumKey] || datumKey;
   },
 
+  async ensureCollections() {
+    if (this._issuesCollection && this._columnsCollection) {
+      return {
+        issuesCollection: this._issuesCollection,
+        columnsCollection: this._columnsCollection,
+      };
+    }
+
+    const issuesCollection = db.collection('issues', {
+      capped: true,
+      size: 50000,
+    });
+    await new EmberPromise((resolve, reject) => {
+      issuesCollection.load(err => {
+        if (!err) {
+          return resolve();
+        }
+        reject(err);
+      });
+    });
+
+    const columnsCollection = db.collection('columnSet');
+    await new EmberPromise((resolve, reject) => {
+      columnsCollection.load(err => {
+        if (!err) {
+          return resolve();
+        }
+        reject(err);
+      });
+    });
+
+    this.set('_issuesCollection', issuesCollection);
+    this.set('_columnsCollection', columnsCollection);
+
+    const columns = columnsCollection.find({ _id: 'mainSet' });
+    if (columns.length > 0) {
+      this._columns.setProperties(columns[0]);
+    }
+
+    return { issuesCollection, columnsCollection };
+  },
+
   init() {
     this._super(...arguments);
-    this.set('_issues', ArrayProxy.create({ content: A([]) }));
     this.set('_columns', EmberObject.create());
   },
 });
