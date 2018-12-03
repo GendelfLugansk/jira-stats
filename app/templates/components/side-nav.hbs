@@ -11,7 +11,16 @@
   <h4 class="uk-text-center uk-margin-remove-vertical text-light">Jon Snow</h4>
 
   <div class="uk-position-relative uk-text-center uk-display-block">
-    <span class="uk-text-small uk-text-muted uk-display-block uk-text-center">You Know Nothing</span>
+    <a href="#" class="uk-text-small uk-text-muted uk-display-block uk-text-center"
+       data-uk-icon="icon: triangle-down; ratio: 0.7">You Know Nothing</a>
+    <!-- user dropdown -->
+    <div class="uk-dropdown user-drop"
+         data-uk-dropdown="mode: click; pos: bottom-center; animation: uk-animation-slide-bottom-small; duration: 150">
+      <ul class="uk-nav uk-dropdown-nav uk-text-left">
+        <li><a onclick={{action dropDatabase}}><span data-uk-icon="icon: database"></span> Drop Database</a></li>
+      </ul>
+    </div>
+    <!-- /user dropdown -->
   </div>
 </div>
 

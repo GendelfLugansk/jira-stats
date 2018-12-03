@@ -32,8 +32,8 @@
             <td>{{issue.assignee}}</td>
             <td>{{issue.status}}</td>
             <td>{{issue.sprint}}</td>
-            <td>{{issue.time_spent}}</td>
-            <td>{{issue.original_estimate}}</td>
+            <td>{{if issue.time_spent (duration-format issue.time_spent) (html '&mdash;')}}</td>
+            <td>{{if issue.original_estimate (duration-format issue.original_estimate) (html '&mdash;')}}</td>
             <td>{{issue.work_ratio}}</td>
           </tr>
         {{/each}}
@@ -81,7 +81,9 @@
       {{#if refreshModel.isIdle}}
         You don't have issues to display. Maybe you want to {{link-to 'Import' 'import'}}?
       {{else}}
-        Loading issues...
+        <div class="uk-text-center uk-margin-large-top uk-margin-large-bottom">
+          <div uk-spinner="ratio: 3"></div>
+        </div>
       {{/if}}
     {{/if}}
   </div>

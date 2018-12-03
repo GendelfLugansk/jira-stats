@@ -21,7 +21,7 @@
       <a class="uk-button uk-button-primary uk-button-large">
         {{#if isQueueFull}}
           {{#if upload.isRunning}}
-            Parsing...
+            <div uk-spinner></div>
           {{else}}
             Selected
           {{/if}}

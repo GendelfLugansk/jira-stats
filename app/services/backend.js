@@ -305,6 +305,11 @@ export default Service.extend({
     return { issuesCollection, columnsCollection };
   },
 
+  dropDatabase() {
+    db.drop();
+    window.location.reload();
+  },
+
   init() {
     this._super(...arguments);
     this.set('_columns', EmberObject.create());
