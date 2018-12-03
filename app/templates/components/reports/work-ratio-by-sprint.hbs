@@ -1,12 +1,16 @@
-<div class="uk-card uk-card-default uk-card-small uk-card-hover">
+<div class="uk-card uk-card-default uk-card-small">
   <div class="uk-card-header">
     <div class="uk-grid uk-grid-small">
-      <div class="uk-width-auto"><h4>Work Ratio By Sprint</h4></div>
+      <div class="uk-width-auto"><h4>Median of Work Ratio (Logged Time / Estimated Time) By Sprint</h4></div>
     </div>
   </div>
   <div class="uk-card-body">
-    <div class="chart-container">
-
-    </div>
+    {{#if plotlyData.length}}
+      <div class="chart-container" id="{{chartId}}"></div>
+    {{else}}
+      <div id="{{chartId}}">
+        It seems that you don't have enough issues to build this chart. Maybe you want to {{link-to 'Import' 'import'}}?
+      </div>
+    {{/if}}
   </div>
 </div>

@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { task } from 'ember-concurrency';
 
 export default Component.extend({
   tagName: 'aside',
@@ -8,7 +9,7 @@ export default Component.extend({
 
   backend: service(),
 
-  dropDatabase() {
-    this.backend.dropDatabase();
-  },
+  dropDatabase: task(function*() {
+    yield this.backend.dropDatabase();
+  }),
 });

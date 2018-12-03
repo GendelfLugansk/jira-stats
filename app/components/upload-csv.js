@@ -48,7 +48,7 @@ export default Component.extend({
       yield this.backend.upload(file);
       file.queue.remove(file);
 
-      next(this, 'transitionToRoute', 'issues');
+      next(this, 'transitionToRoute', 'reports');
     } catch (e) {
       file.queue.remove(file);
       throw e;

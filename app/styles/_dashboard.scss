@@ -1,5 +1,7 @@
 //https://github.com/zzseba78/Kick-Off
 
+$sidebarWidth: 200px;
+
 /* -- Top navigation -- */
 #top-head {
   z-index: 9;
@@ -32,7 +34,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #222A30;
-  width: 240px;
+  width: $sidebarWidth;
   z-index: 2;
   transition: height 0.3s ease-out;
 }
@@ -109,7 +111,7 @@
   right: 0;
   z-index: 3;
   bottom: 0;
-  width: 240px;
+  width: $sidebarWidth;
 }
 
 .left-logo {
@@ -149,12 +151,12 @@
   padding: 30px 0 0 0;
   background-color: #f7f7f7;
   transition: margin 0.2s cubic-bezier(.4, 0, .2, 1);
-  margin-left: 240px;
+  margin-left: $sidebarWidth;
 }
 
 #top-head [class*="uk-navbar-dropdown-bottom"] {
   margin-top: 0;
-  left: 240px;
+  left: $sidebarWidth;
 }
 
 /* Search nav */
@@ -223,6 +225,6 @@
 /* Charts */
 .chart-container {
   position: relative;
-  height: 300px;
+  min-height: 300px;
   margin: 0 auto;
 }

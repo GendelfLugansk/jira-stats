@@ -4,6 +4,7 @@ import { Promise as EmberPromise } from 'rsvp';
 import EmberObject from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import math from 'npm:mathjs';
+import arrayUnique from 'jira-stats/utils/array-unique';
 
 /* global ForerunnerDB */
 const fdb = new ForerunnerDB();
@@ -146,13 +147,22 @@ export default Service.extend({
         datum.created + datum.creator ||
         undefined;
 
-      if (datum.original_estimate !== '' && datum.time_spent !== '') {
+      if (
+        datum.original_estimate !== '' &&
+        datum.time_spent !== '' &&
+        math.larger(math.bignumber(datum.original_estimate), math.bignumber(0))
+      ) {
         datum.__work_ratio = math.number(
           math.divide(
             math.bignumber(datum.time_spent),
             math.bignumber(datum.original_estimate)
           )
         );
+      }
+
+      if (Array.isArray(datum.sprint) && datum.sprint.length > 0) {
+        datum.__last_sprint = datum.sprint[datum.sprint.length - 1];
+        datum.__first_sprint = datum.sprint[0];
       }
 
       parsedData.push(datum);
@@ -305,13 +315,81 @@ export default Service.extend({
     return { issuesCollection, columnsCollection };
   },
 
-  dropDatabase() {
-    db.drop();
+  async dropDatabase() {
+    await new EmberPromise((resolve, reject) => {
+      try {
+        db.drop(resolve);
+      } catch (e) {
+        reject(e);
+      }
+    });
+
     window.location.reload();
   },
 
   init() {
     this._super(...arguments);
     this.set('_columns', EmberObject.create());
+  },
+
+  async chartWorkRatioBySprint() {
+    const { issuesCollection } = await this.ensureCollections();
+    const grouppedIssues = issuesCollection.find(
+      {
+        __work_ratio: {
+          $exists: true,
+        },
+        __first_sprint: {
+          $exists: true,
+        },
+      },
+      {
+        $groupBy: {
+          assignee: 1,
+        },
+      }
+    );
+    const sprints = arrayUnique(
+      Object.values(grouppedIssues)
+        .filter(issues => Array.isArray(issues))
+        .reduce(
+          (acc, issues) =>
+            acc.concat(issues.map(issue => issue.__first_sprint)),
+          []
+        )
+    );
+    sprints.sort((a, b) => {
+      const re = /\d+/g;
+      const matchA = String(a).match(re);
+      const matchB = String(b).match(re);
+      return Number(matchA[0] || 0) - Number(matchB[0] || 0);
+    });
+
+    const traces = [];
+    for (let k in grouppedIssues) {
+      if (
+        grouppedIssues.hasOwnProperty(k) &&
+        Array.isArray(grouppedIssues[k])
+      ) {
+        traces.push({
+          name: k === '' ? 'unassigned' : k,
+          type: 'bar',
+          x: sprints,
+          y: sprints.map(sprint => {
+            let ratios = grouppedIssues[k]
+              .filter(issue => issue.__first_sprint === sprint)
+              .map(issue => math.bignumber(issue.__work_ratio));
+
+            if (ratios.length === 0) {
+              return undefined;
+            }
+
+            return math.number(math.round(math.median(ratios), 2));
+          }),
+        });
+      }
+    }
+
+    return traces;
   },
 });
