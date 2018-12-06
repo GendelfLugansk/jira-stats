@@ -332,14 +332,15 @@ export default Service.extend({
     this.set('_columns', EmberObject.create());
   },
 
-  async chartWorkRatioBySprint() {
+  async chartMedianWorkRatioByLastSprint() {
     const { issuesCollection } = await this.ensureCollections();
     const grouppedIssues = issuesCollection.find(
       {
+        status: 'Done',
         __work_ratio: {
           $exists: true,
         },
-        __first_sprint: {
+        __last_sprint: {
           $exists: true,
         },
       },
@@ -353,8 +354,7 @@ export default Service.extend({
       Object.values(grouppedIssues)
         .filter(issues => Array.isArray(issues))
         .reduce(
-          (acc, issues) =>
-            acc.concat(issues.map(issue => issue.__first_sprint)),
+          (acc, issues) => acc.concat(issues.map(issue => issue.__last_sprint)),
           []
         )
     );
@@ -377,7 +377,7 @@ export default Service.extend({
           x: sprints,
           y: sprints.map(sprint => {
             let ratios = grouppedIssues[k]
-              .filter(issue => issue.__first_sprint === sprint)
+              .filter(issue => issue.__last_sprint === sprint)
               .map(issue => math.bignumber(issue.__work_ratio));
 
             if (ratios.length === 0) {
@@ -385,6 +385,67 @@ export default Service.extend({
             }
 
             return math.number(math.round(math.median(ratios), 2));
+          }),
+        });
+      }
+    }
+
+    return traces;
+  },
+
+  async chartMeanWorkRatioByLastSprint() {
+    const { issuesCollection } = await this.ensureCollections();
+    const grouppedIssues = issuesCollection.find(
+      {
+        status: 'Done',
+        __work_ratio: {
+          $exists: true,
+        },
+        __last_sprint: {
+          $exists: true,
+        },
+      },
+      {
+        $groupBy: {
+          assignee: 1,
+        },
+      }
+    );
+    const sprints = arrayUnique(
+      Object.values(grouppedIssues)
+        .filter(issues => Array.isArray(issues))
+        .reduce(
+          (acc, issues) => acc.concat(issues.map(issue => issue.__last_sprint)),
+          []
+        )
+    );
+    sprints.sort((a, b) => {
+      const re = /\d+/g;
+      const matchA = String(a).match(re);
+      const matchB = String(b).match(re);
+      return Number(matchA[0] || 0) - Number(matchB[0] || 0);
+    });
+
+    const traces = [];
+    for (let k in grouppedIssues) {
+      if (
+        grouppedIssues.hasOwnProperty(k) &&
+        Array.isArray(grouppedIssues[k])
+      ) {
+        traces.push({
+          name: k === '' ? 'unassigned' : k,
+          type: 'bar',
+          x: sprints,
+          y: sprints.map(sprint => {
+            let ratios = grouppedIssues[k]
+              .filter(issue => issue.__last_sprint === sprint)
+              .map(issue => math.bignumber(issue.__work_ratio));
+
+            if (ratios.length === 0) {
+              return undefined;
+            }
+
+            return math.number(math.round(math.mean(ratios), 2));
           }),
         });
       }

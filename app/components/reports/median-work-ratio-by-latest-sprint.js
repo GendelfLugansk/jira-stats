@@ -143,15 +143,26 @@ export default Component.extend(ChartMixin, {
   backend: service(),
 
   fetch: task(function*() {
-    const traces = yield this.backend.chartWorkRatioBySprint();
+    const traces = yield this.backend.chartMedianWorkRatioByLastSprint();
 
     if (traces.length === 0) {
       return;
     }
 
+    traces.forEach(trace => {
+      trace.textposition = 'outside';
+      trace.text = trace.y;
+    });
+
     this.set('plotlyData', traces);
     this.set('plotlyLayout', {
       height: 500,
+      margin: {
+        r: 60,
+        t: 50,
+        b: 50,
+        l: 25,
+      },
       barmode: 'group',
       hovermode: 'closest',
       colorway,
