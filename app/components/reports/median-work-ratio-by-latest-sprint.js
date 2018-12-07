@@ -29,7 +29,7 @@ export default Component.extend(ChartMixin, {
         r: 60,
         t: 50,
         b: 50,
-        l: 25,
+        l: 40,
       },
       barmode: 'group',
       hovermode: 'closest',
@@ -66,6 +66,8 @@ export default Component.extend(ChartMixin, {
           },
         },
       ],
+      xaxis: { title: 'Sprint' },
+      yaxis: { title: 'Median Work Ratio' },
     });
   }).drop(),
 });

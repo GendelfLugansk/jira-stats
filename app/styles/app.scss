@@ -1,4 +1,5 @@
 @import "dashboard";
+@import "helper";
 
 .report-chart {
   @media print {
@@ -16,4 +17,8 @@
   @media print {
     display: none;
   }
+}
+
+.uk-light .uk-nav-sub > li.uk-active > a {
+  color: #fff;
 }

@@ -8,7 +8,7 @@ export default Component.extend(ChartMixin, {
   chartColors: service(),
 
   fetch: task(function*() {
-    const traces = yield this.backend.chartMeanWorkRatioByLastSprint();
+    const traces = yield this.backend.chartMeanWorkRatioByLabelsCombined();
 
     if (traces.length === 0) {
       return;
@@ -66,7 +66,7 @@ export default Component.extend(ChartMixin, {
           },
         },
       ],
-      xaxis: { title: 'Sprint' },
+      xaxis: { title: 'Combined Labels' },
       yaxis: { title: 'Mean Work Ratio' },
     });
   }).drop(),

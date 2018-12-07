@@ -75,6 +75,9 @@ export default Mixin.create({
     this._super(...arguments);
     $(window).on('resize', this.resizeHandler);
 
+    const mql = window.matchMedia('print');
+    mql.addListener(this.resizeImmediatelyHandler);
+
     if (this.fetch && this.fetch.perform) {
       this.fetch.perform();
     } else {
@@ -86,6 +89,8 @@ export default Mixin.create({
   willDestroyElement() {
     this._super(...arguments);
     $(window).off('resize', this.resizeHandler);
+    const mql = window.matchMedia('print');
+    mql.removeListener(this.resizeImmediatelyHandler);
     Plotly.purge(this.chartId);
   },
 
@@ -94,6 +99,14 @@ export default Mixin.create({
 
     return function() {
       debounce(that, 'drawChart', 150);
+    };
+  }),
+
+  resizeImmediatelyHandler: computed(function() {
+    const that = this;
+
+    return function() {
+      that.drawChart();
     };
   }),
 

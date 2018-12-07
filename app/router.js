@@ -9,7 +9,13 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('import');
   this.route('issues');
-  this.route('reports');
+  this.route('reports', function() {
+    this.route('common');
+    this.route('sprint');
+    this.route('label');
+    this.route('labels-combined');
+    this.route('all');
+  });
 
   this.route('dashboard-example');
 });

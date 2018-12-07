@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import ChartMixin from './chart-mixin';
 import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
+import math from 'npm:mathjs';
 
 export default Component.extend(ChartMixin, {
   backend: service(),
@@ -19,6 +20,15 @@ export default Component.extend(ChartMixin, {
         color: this.chartColors.getColor('assignee', trace.name),
       };
     });
+
+    traces.sort((a, b) =>
+      math.number(
+        math.subtract(
+          math.median(b.x.map(x => math.bignumber(x))),
+          math.median(a.x.map(x => math.bignumber(x)))
+        )
+      )
+    );
 
     this.set('plotlyData', traces);
     this.set('plotlyLayout', {

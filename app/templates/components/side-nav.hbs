@@ -29,7 +29,7 @@
     <li class="uk-nav-header">ACTIONS</li>
     {{#link-to 'index' disabled=true tagName='li' activeClass='uk-active'}}
       {{#link-to 'index'}}
-      <span data-uk-icon="icon: home" class="uk-margin-small-right"></span>Home
+        <span data-uk-icon="icon: home" class="uk-margin-small-right"></span>Home
       {{/link-to}}
     {{/link-to}}
 
@@ -45,10 +45,35 @@
       {{/link-to}}
     {{/link-to}}
 
-    {{#link-to 'reports' disabled=true tagName='li' activeClass='uk-active'}}
-      {{#link-to 'reports'}}
-        <span data-uk-icon="icon: folder" class="uk-margin-small-right"></span>Reports
-      {{/link-to}}
+    {{#link-to 'reports' disabled=true tagName='li' activeClass='uk-open' class="uk-parent"}}
+      <a><span data-uk-icon="icon: folder" class="uk-margin-small-right"></span>Reports</a>
+      <ul class="uk-nav-sub">
+        {{#link-to 'reports.common' disabled=true tagName='li' activeClass='uk-active'}}
+          {{#link-to 'reports.common'}}
+            Common
+          {{/link-to}}
+        {{/link-to}}
+        {{#link-to 'reports.sprint' disabled=true tagName='li' activeClass='uk-active'}}
+          {{#link-to 'reports.sprint'}}
+            Sprint
+          {{/link-to}}
+        {{/link-to}}
+        {{#link-to 'reports.label' disabled=true tagName='li' activeClass='uk-active'}}
+          {{#link-to 'reports.label'}}
+            Label
+          {{/link-to}}
+        {{/link-to}}
+        {{#link-to 'reports.labels-combined' disabled=true tagName='li' activeClass='uk-active'}}
+          {{#link-to 'reports.labels-combined'}}
+            Labels (combined)
+          {{/link-to}}
+        {{/link-to}}
+        {{#link-to 'reports.all' disabled=true tagName='li' activeClass='uk-active'}}
+          {{#link-to 'reports.all'}}
+            All
+          {{/link-to}}
+        {{/link-to}}
+      </ul>
     {{/link-to}}
   </ul>
 </div>

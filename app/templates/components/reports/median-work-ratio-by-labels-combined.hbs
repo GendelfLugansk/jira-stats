@@ -1,0 +1,27 @@
+<div class="uk-card uk-card-default uk-card-small">
+  <div class="uk-card-header">
+    <div class="uk-grid uk-grid-small">
+      <div class="uk-width-auto"><h4>Median of Work Ratio (Logged Time / Estimated Time) By Labels (combined)</h4></div>
+    </div>
+  </div>
+  <div class="uk-card-body">
+    {{#if fetch.isIdle}}
+      {{#if plotlyData.length}}
+        <div class="chart-container" id="{{chartId}}"></div>
+      {{else}}
+        <p id="{{chartId}}">
+          It seems that you don't have enough issues to build this chart. Maybe you want to {{link-to 'Import'
+                                                                                                      'import'}}?
+        </p>
+      {{/if}}
+    {{else}}
+      <div class="uk-text-center uk-margin-large-top uk-margin-large-bottom">
+        <div uk-spinner="ratio: 3"></div>
+      </div>
+    {{/if}}
+    <p class="uk-text-meta">
+      This chart shows median of Logged Time / Estimated Time, grouped by assignee and combined labels.
+      Only issues with status 'Done' included.
+    </p>
+  </div>
+</div>
