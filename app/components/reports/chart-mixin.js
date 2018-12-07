@@ -8,6 +8,7 @@ import $ from 'jquery';
  * Mixin for chart components with Plotly
  */
 export default Mixin.create({
+  classNames: ['report-chart'],
   /**
    * If defined, this task will be performed on initialization
    * It should fetch plotlyData from API and set `plotlyData`, `plotlyLayout` and `plotlyConfig`

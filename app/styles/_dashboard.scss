@@ -37,6 +37,10 @@ $sidebarWidth: 200px;
   width: $sidebarWidth;
   z-index: 2;
   transition: height 0.3s ease-out;
+
+  @media print {
+    display: none;
+  }
 }
 
 /* Left bar links */
@@ -152,11 +156,19 @@ $sidebarWidth: 200px;
   background-color: #f7f7f7;
   transition: margin 0.2s cubic-bezier(.4, 0, .2, 1);
   margin-left: $sidebarWidth;
+
+  @media print {
+    margin-left: 0;
+  }
 }
 
 #top-head [class*="uk-navbar-dropdown-bottom"] {
   margin-top: 0;
   left: $sidebarWidth;
+
+  @media print {
+    left: 0;
+  }
 }
 
 /* Search nav */

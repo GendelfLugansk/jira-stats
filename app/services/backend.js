@@ -453,4 +453,44 @@ export default Service.extend({
 
     return traces;
   },
+
+  async chartWorkRatioHistogram() {
+    const { issuesCollection } = await this.ensureCollections();
+    const grouppedIssues = issuesCollection.find(
+      {
+        status: 'Done',
+        __work_ratio: {
+          $exists: true,
+        },
+      },
+      {
+        $groupBy: {
+          assignee: 1,
+        },
+      }
+    );
+
+    const traces = [];
+    for (let k in grouppedIssues) {
+      if (
+        grouppedIssues.hasOwnProperty(k) &&
+        Array.isArray(grouppedIssues[k])
+      ) {
+        traces.push({
+          name: k === '' ? 'unassigned' : k,
+          x: grouppedIssues[k].map(issue => issue.__work_ratio),
+          autobinx: false,
+          histfunc: 'count',
+          histnorm: 'percent',
+          opacity: 0.5,
+          type: 'histogram',
+          xbins: {
+            size: 0.1,
+          },
+        });
+      }
+    }
+
+    return traces;
+  },
 });

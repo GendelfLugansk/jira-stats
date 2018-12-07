@@ -1,1 +1,19 @@
 @import "dashboard";
+
+.report-chart {
+  @media print {
+    page-break-inside: avoid;
+  }
+}
+
+.uk-grid {
+  @media print {
+    display: block;
+  }
+}
+
+.main-footer {
+  @media print {
+    display: none;
+  }
+}
