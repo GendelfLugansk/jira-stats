@@ -2,10 +2,10 @@ import Component from '@ember/component';
 import ChartMixin from './chart-mixin';
 import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
-import colorway from './colorway';
 
 export default Component.extend(ChartMixin, {
   backend: service(),
+  chartColors: service(),
 
   fetch: task(function*() {
     const traces = yield this.backend.chartWorkRatioHistogram();
@@ -13,6 +13,12 @@ export default Component.extend(ChartMixin, {
     if (traces.length === 0) {
       return;
     }
+
+    traces.forEach(trace => {
+      trace.marker = {
+        color: this.chartColors.getColor('assignee', trace.name),
+      };
+    });
 
     this.set('plotlyData', traces);
     this.set('plotlyLayout', {
@@ -25,7 +31,7 @@ export default Component.extend(ChartMixin, {
       },
       barmode: 'overlay',
       hovermode: 'closest',
-      colorway,
+      colorway: this.get('chartColors.colors'),
       bargap: 0.05,
       bargroupgap: 0.2,
       xaxis: { title: 'Work Ratio' },

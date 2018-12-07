@@ -8,7 +8,7 @@ export default Component.extend(ChartMixin, {
   chartColors: service(),
 
   fetch: task(function*() {
-    const traces = yield this.backend.chartMeanWorkRatioByLastSprint();
+    const traces = yield this.backend.chartMinWorkRatioByLastSprint();
 
     if (traces.length === 0) {
       return;

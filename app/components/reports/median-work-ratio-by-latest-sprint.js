@@ -2,10 +2,10 @@ import Component from '@ember/component';
 import ChartMixin from './chart-mixin';
 import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
-import colorway from './colorway';
 
 export default Component.extend(ChartMixin, {
   backend: service(),
+  chartColors: service(),
 
   fetch: task(function*() {
     const traces = yield this.backend.chartMedianWorkRatioByLastSprint();
@@ -17,6 +17,9 @@ export default Component.extend(ChartMixin, {
     traces.forEach(trace => {
       trace.textposition = 'outside';
       trace.text = trace.y;
+      trace.marker = {
+        color: this.chartColors.getColor('assignee', trace.name),
+      };
     });
 
     this.set('plotlyData', traces);
@@ -30,7 +33,7 @@ export default Component.extend(ChartMixin, {
       },
       barmode: 'group',
       hovermode: 'closest',
-      colorway,
+      colorway: this.get('chartColors.colors'),
       bargap: 0.2,
       bargroupgap: 0.1,
       shapes: [

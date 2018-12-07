@@ -5,12 +5,19 @@
     </div>
   </div>
   <div class="uk-card-body">
-    {{#if plotlyData.length}}
-      <div class="chart-container" id="{{chartId}}"></div>
+    {{#if fetch.isIdle}}
+      {{#if plotlyData.length}}
+        <div class="chart-container" id="{{chartId}}"></div>
+      {{else}}
+        <p id="{{chartId}}">
+          It seems that you don't have enough issues to build this chart. Maybe you want to {{link-to 'Import'
+                                                                                                      'import'}}?
+        </p>
+      {{/if}}
     {{else}}
-      <p id="{{chartId}}">
-        It seems that you don't have enough issues to build this chart. Maybe you want to {{link-to 'Import' 'import'}}?
-      </p>
+      <div class="uk-text-center uk-margin-large-top uk-margin-large-bottom">
+        <div uk-spinner="ratio: 3"></div>
+      </div>
     {{/if}}
     <p class="uk-text-meta">
       This chart shows median of Logged Time / Estimated Time, grouped by assignee and latest sprint. For

@@ -1,9 +1,12 @@
+import Service from '@ember/service';
+import { computed, get, set } from '@ember/object';
+
 /**
  * Colors generated with http://tools.medialab.sciences-po.fr/iwanthue/
  *
  * @type {string[]}
  */
-const colorway = [
+const colors = [
   '#57b0c8',
   '#cbee2f',
   '#ec6eec',
@@ -134,4 +137,44 @@ const colorway = [
   '#b2d27a',
 ];
 
-export default colorway;
+const colorsCache = {},
+  categoriesCache = {};
+
+export default Service.extend({
+  colors: computed(function() {
+    return colors;
+  }),
+
+  getColor(category, key) {
+    const cat = this._escapePathPart(category);
+    const k = this._escapePathPart(key);
+    if (get(colorsCache, `${cat}.${k}`)) {
+      return get(colorsCache, `${cat}.${k}`);
+    }
+
+    if (!colorsCache[cat]) {
+      colorsCache[cat] = {};
+    }
+
+    if (!categoriesCache[cat]) {
+      categoriesCache[cat] = [];
+    }
+
+    const color = this._colorByIndex(categoriesCache[cat].length);
+
+    categoriesCache[cat].push(k);
+    if (color) {
+      set(colorsCache, `${cat}.${k}`, color);
+    }
+
+    return color;
+  },
+
+  _colorByIndex(index) {
+    return index < colors.length ? colors[index] : undefined;
+  },
+
+  _escapePathPart(category) {
+    return String(category).replace(/\./gi, '__dot__');
+  },
+});
