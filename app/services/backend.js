@@ -61,6 +61,10 @@ for (let k in aliases) {
 }
 
 const whitelistedColumns = Object.keys(aliases);
+const requiredColumns = ['issue_id', 'original_estimate', 'time_spent'].map(
+  alias => aliasesInverted[alias] || alias
+);
+
 const ensureMultipleValuesForAliases = [
   'affects_versions',
   'fix_versions',
@@ -129,6 +133,13 @@ export default Service.extend(
           columns[columnName]._index.push(_index);
         }
       });
+      const valid = requiredColumns.reduce(
+        (acc, columnName) => acc && columns.hasOwnProperty(columnName),
+        true
+      );
+      if (!valid) {
+        throw new Error('File does not contain required columns');
+      }
       const parsedData = [];
       while (rawCsvArray.data.length > 0) {
         const rawRow = rawCsvArray.data.shift();

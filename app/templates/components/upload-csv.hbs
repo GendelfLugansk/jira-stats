@@ -4,31 +4,84 @@
       <div class="uk-width-auto"><h4>Import</h4></div>
     </div>
   </div>
-  <div class="uk-card-body uk-text-center">
-    {{#if upload.last.isError}}
-      <div class="uk-alert-danger" uk-alert onclick={{pipe-action
-        (action (mut upload.last.isError) false)
-        (action (mut upload.last.error) undefined)
-      }}>
-        <p>{{stringify-error upload.last.error}}</p>
-      </div>
-    {{/if}}
+  <div class="uk-card-body">
+    <p><strong>App will not work if you have language different from "English (USA)" in personal JIRA
+      settings &mdash; this leads to translated column headers in CSV</strong></p>
 
-    {{#file-upload name=queueName
-                   multiple=false
-                   disabled=(or isQueueFull upload.isRunning)
-                   onfileadd=(perform upload) as |queue|}}
-      <a class="uk-button uk-button-primary uk-button-large">
-        {{#if isQueueFull}}
-          {{#if upload.isRunning}}
-            <div uk-spinner></div>
+    <p>How to use:</p>
+
+    <ol>
+      <li>
+        In JIRA:
+        <ol>
+          <li>Go to the board or project you wish to export</li>
+          <li>On the left side, click on Issues and filters</li>
+          <li>Click "Advanced search"</li>
+          <li>Apply filters if you want/need</li>
+          <li>
+            <strong>Make sure that you have no more than 1000 issues selected - JIRA exports only 1000 into file.
+              Use filters to receive few smaller files</strong>
+          </li>
+          <li>
+            On the top right of your screen, click on the "Export" drop down (second icon from the right).
+          </li>
+          <li>Save file to your PC</li>
+        </ol>
+      </li>
+      <li>
+        In this app:
+        <ol>
+          <li>Click button below</li>
+          <li>Choose file that you received in previous steps</li>
+          <li>Wait while application parses it</li>
+          <li>Now you can go to reports</li>
+        </ol>
+      </li>
+    </ol>
+
+    <p>File with issues must have following columns:</p>
+
+    <ul>
+      <li>{{name-for-key 'issue_id'}}</li>
+      <li>{{name-for-key 'original_estimate'}}</li>
+      <li>{{name-for-key 'time_spent'}}</li>
+    </ul>
+
+    <p>It is highly recommended to have following columns in your file:</p>
+
+    <ul>
+      <li>{{name-for-key 'assignee'}}</li>
+      <li>{{name-for-key 'labels'}}</li>
+      <li>{{name-for-key 'sprint'}}</li>
+      <li>{{name-for-key 'status'}}</li>
+    </ul>
+
+    <div class="uk-text-center">
+      {{#if upload.last.isError}}
+        <div class="uk-alert-danger" uk-alert onclick={{pipe-action
+          (action (mut upload.last.isError) false)
+          (action (mut upload.last.error) undefined)
+        }}>
+          <p>{{stringify-error upload.last.error}}</p>
+        </div>
+      {{/if}}
+
+      {{#file-upload name=queueName
+                     multiple=false
+                     disabled=(or isQueueFull upload.isRunning)
+                     onfileadd=(perform upload) as |queue|}}
+        <a class="uk-button uk-button-primary uk-button-large">
+          {{#if isQueueFull}}
+            {{#if upload.isRunning}}
+              <div uk-spinner></div>
+            {{else}}
+              Selected
+            {{/if}}
           {{else}}
-            Selected
+            Select File
           {{/if}}
-        {{else}}
-          Select File
-        {{/if}}
-      </a>
-    {{/file-upload}}
+        </a>
+      {{/file-upload}}
+    </div>
   </div>
 </div>

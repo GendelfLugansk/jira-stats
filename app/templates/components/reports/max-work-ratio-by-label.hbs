@@ -19,9 +19,11 @@
         <div uk-spinner="ratio: 3"></div>
       </div>
     {{/if}}
-    <p class="uk-text-meta">
-      This chart shows maximum of Logged Time / Estimated Time, grouped by assignee and labels.
-      Only issues with status 'Done' included.
-    </p>
+    {{#if plotlyData.length}}
+      <p class="uk-text-meta">
+        This chart shows maximum of Logged Time / Estimated Time, grouped by assignee and labels.
+        Only issues with status 'Done' included.
+      </p>
+    {{/if}}
   </div>
 </div>

@@ -19,8 +19,11 @@
         <div uk-spinner="ratio: 3"></div>
       </div>
     {{/if}}
-    <p class="uk-text-meta">
-      Shows percentage of issues by work ratio. Only issues with status 'Done' included.
-    </p>
+    {{#if plotlyData.length}}
+      <p class="uk-text-meta">
+        Shows percentage of issues by work ratio. Only issues with status 'Done' included. Closer
+        peak to 1 - better.
+      </p>
+    {{/if}}
   </div>
 </div>
