@@ -5,7 +5,9 @@
 
     <div class="uk-grid uk-grid-medium " uk-height-viewport="expand: true" data-uk-grid>
 
-      {{issue-list page=page pageSize=pageSize sort=sort class="uk-width-1-1 uk-height-1-1"}}
+      {{issue-filters appliedFilters=filters onApplyFilters=(action (mut filters)) class="uk-width-1-1"}}
+
+      {{issue-list page=page pageSize=pageSize filters=filters sort=sort class="uk-width-1-1 uk-height-1-1"}}
 
     </div>
 

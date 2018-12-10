@@ -1,15 +1,17 @@
 import Mixin from '@ember/object/mixin';
+import $ from 'jquery';
+
+const { extend } = $;
 
 export default Mixin.create({
-  async chartWorkRatioHistogram() {
+  async chartWorkRatioHistogram({ filters } = {}) {
     const { issuesCollection } = await this.ensureCollections();
     const groupedIssues = issuesCollection.find(
-      {
-        status: 'Done',
+      extend({}, this.filtersToQuery(filters), {
         __work_ratio: {
           $exists: true,
         },
-      },
+      }),
       {
         $groupBy: {
           assignee: 1,

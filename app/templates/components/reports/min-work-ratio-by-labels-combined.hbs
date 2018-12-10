@@ -1,7 +1,8 @@
 <div class="uk-card uk-card-default uk-card-small">
   <div class="uk-card-header">
     <div class="uk-grid uk-grid-small">
-      <div class="uk-width-auto"><h4>Minimum of Work Ratio (Logged Time / Estimated Time) By Labels (combined)</h4></div>
+      <div class="uk-width-auto"><h4>Minimum of Work Ratio (Logged Time / Estimated Time) By Labels (combined)</h4>
+      </div>
     </div>
   </div>
   <div class="uk-card-body">
@@ -10,8 +11,8 @@
         <div class="chart-container" id="{{chartId}}"></div>
       {{else}}
         <p id="{{chartId}}">
-          It seems that you don't have enough issues to build this chart. Maybe you want to {{link-to 'Import'
-                                                                                                      'import'}}?
+          It seems that you don't have enough issues to build this chart. You may need to adjust filters (on top of this
+          page) or {{link-to 'Import' 'import'}} issues.
         </p>
       {{/if}}
     {{else}}
@@ -22,7 +23,7 @@
     {{#if plotlyData.length}}
       <p class="uk-text-meta">
         This chart shows minimum of Logged Time / Estimated Time, grouped by assignee and combined labels.
-        Only issues with status 'Done' included.
+
       </p>
     {{/if}}
   </div>

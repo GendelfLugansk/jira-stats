@@ -25,6 +25,7 @@
           <li>
             On the top right of your screen, click on the "Export" drop down (second icon from the right).
           </li>
+          <li>Choose "Export Excel CSV (All fields)"</li>
           <li>Save file to your PC</li>
         </ol>
       </li>
@@ -55,6 +56,20 @@
       <li>{{name-for-key 'sprint'}}</li>
       <li>{{name-for-key 'status'}}</li>
     </ul>
+
+    <p>Other recommendations:</p>
+
+    <ul>
+      <li>App will sort sprints correctly if they contain some text prefix and number. For example:
+        "Sprint 31", "Sprint-31", "Project Name 31"
+      </li>
+    </ul>
+
+    <p>
+      <strong>Please note that file upload does not fully replace stored issues but updates them. If two files
+        have the same issue (app checks {{name-for-key 'issue_id'}}), values from file which was uploaded
+      second will be saved</strong>
+    </p>
 
     <div class="uk-text-center">
       {{#if upload.last.isError}}

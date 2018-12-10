@@ -1,6 +1,8 @@
 @import "dashboard";
 @import "helper";
 
+@import "components/issue-filters";
+
 .report-chart {
   @media print {
     page-break-inside: avoid;

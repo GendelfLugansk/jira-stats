@@ -25,8 +25,6 @@ const aliases = {
   Assignee: 'assignee',
   Created: 'created',
   Creator: 'creator',
-  'Custom field (Start date)': 'start_date', //string in exporter timezone
-  'Custom field (Story Points)': 'story_points',
   'Due date': 'due_date', //string in exporter timezone
   'Fix Version/s': 'fix_versions',
   'Issue Type': 'issue_type',
@@ -61,6 +59,7 @@ for (let k in aliases) {
 }
 
 const whitelistedColumns = Object.keys(aliases);
+
 const requiredColumns = ['issue_id', 'original_estimate', 'time_spent'].map(
   alias => aliasesInverted[alias] || alias
 );
@@ -71,6 +70,105 @@ const ensureMultipleValuesForAliases = [
   'labels',
   'log_work',
   'sprint',
+];
+
+const computedKeysI18n = {
+  __labels_combined: 'Labels (combined)',
+  __first_sprint: 'First Sprint',
+  __last_sprint: 'Latest Sprint',
+  __work_ratio: 'Spent / Est.',
+};
+
+const datumKeyToName = function(datumKey) {
+  return aliasesInverted[datumKey] || computedKeysI18n[datumKey] || datumKey;
+};
+
+const filtersConfig = [
+  {
+    key: 'labels',
+    name: datumKeyToName('labels'),
+    enableEmptyStrValue: false,
+  },
+  {
+    key: '__labels_combined',
+    name: datumKeyToName('__labels_combined'),
+    enableEmptyStrValue: true,
+    emptyStrValueText: 'Unlabeled',
+  },
+  {
+    key: 'assignee',
+    name: datumKeyToName('assignee'),
+    enableEmptyStrValue: true,
+    emptyStrValueText: 'Unassigned',
+  },
+  {
+    key: 'status',
+    name: datumKeyToName('status'),
+    enableEmptyStrValue: false,
+  },
+  {
+    key: 'sprint',
+    name: datumKeyToName('sprint'),
+    enableEmptyStrValue: false,
+    valueSortFunc(a, b) {
+      const re = /\d+/g;
+      const matchA = String(a).match(re);
+      const matchB = String(b).match(re);
+      return Number(matchA[0] || 0) - Number(matchB[0] || 0);
+    },
+  },
+  {
+    key: '__first_sprint',
+    name: datumKeyToName('__first_sprint'),
+    enableEmptyStrValue: false,
+    valueSortFunc(a, b) {
+      const re = /\d+/g;
+      const matchA = String(a).match(re);
+      const matchB = String(b).match(re);
+      return Number(matchA[0] || 0) - Number(matchB[0] || 0);
+    },
+  },
+  {
+    key: '__last_sprint',
+    name: datumKeyToName('__last_sprint'),
+    enableEmptyStrValue: false,
+    valueSortFunc(a, b) {
+      const re = /\d+/g;
+      const matchA = String(a).match(re);
+      const matchB = String(b).match(re);
+      return Number(matchA[0] || 0) - Number(matchB[0] || 0);
+    },
+  },
+  {
+    key: 'project_name',
+    name: datumKeyToName('project_name'),
+    enableEmptyStrValue: false,
+  },
+  {
+    key: 'creator',
+    name: datumKeyToName('creator'),
+    enableEmptyStrValue: false,
+  },
+  {
+    key: 'reporter',
+    name: datumKeyToName('reporter'),
+    enableEmptyStrValue: false,
+  },
+  {
+    key: 'issue_type',
+    name: datumKeyToName('issue_type'),
+    enableEmptyStrValue: false,
+  },
+  {
+    key: 'priority',
+    name: datumKeyToName('priority'),
+    enableEmptyStrValue: false,
+  },
+  {
+    key: 'resolution',
+    name: datumKeyToName('resolution'),
+    enableEmptyStrValue: false,
+  },
 ];
 
 export default Service.extend(
@@ -239,7 +337,7 @@ export default Service.extend(
       ]);
     },
 
-    async getIssues(page = 1, pageSize = 15, sort /*, filters*/) {
+    async getIssues(page = 1, pageSize = 15, sort, filters = {}) {
       const { issuesCollection } = await this.ensureCollections();
 
       const opts = {};
@@ -257,7 +355,9 @@ export default Service.extend(
         opts.$orderBy = orders;
       }
 
-      const numberOfIssues = issuesCollection.count();
+      const numberOfIssues = issuesCollection.count(
+        this.filtersToQuery(filters)
+      );
 
       pageSize = Math.max(15, Math.min(pageSize, 50));
       const maxPage = pageSize
@@ -285,7 +385,7 @@ export default Service.extend(
         opts.$limit = pageSize;
       }
 
-      const result = issuesCollection.find({}, opts);
+      const result = issuesCollection.find(this.filtersToQuery(filters), opts);
 
       result.meta = {
         pagination: {
@@ -303,7 +403,7 @@ export default Service.extend(
     },
 
     datumKeyToName(datumKey) {
-      return aliasesInverted[datumKey] || datumKey;
+      return datumKeyToName(datumKey);
     },
 
     async ensureCollections() {
@@ -363,6 +463,59 @@ export default Service.extend(
     init() {
       this._super(...arguments);
       this.set('_columns', EmberObject.create());
+    },
+
+    async getAvailableFilters() {
+      const { issuesCollection } = await this.ensureCollections();
+
+      return filtersConfig
+        .map(filterConfig => {
+          const $distinct = {};
+          $distinct[filterConfig.key] = 1;
+          const values = issuesCollection.find(
+            {
+              $distinct,
+            },
+            {
+              $aggregate: filterConfig.key,
+            }
+          );
+
+          return {
+            key: filterConfig.key,
+            name: filterConfig.name,
+            possibleValues: arrayUnique(
+              values
+                .reduce((acc, value) => {
+                  if (Array.isArray(value)) {
+                    return acc.concat(value);
+                  }
+
+                  acc.push(value);
+                  return acc;
+                }, [])
+                .filter(
+                  value => filterConfig.enableEmptyStrValue || value !== ''
+                )
+            ).sort(filterConfig.valueSortFunc),
+            emptyStrValueText: filterConfig.emptyStrValueText,
+          };
+        })
+        .filter(filterConfig => filterConfig.possibleValues.length > 0);
+    },
+
+    filtersToQuery(filters = {}) {
+      filters = typeof filters === 'string' ? JSON.parse(filters) : filters;
+      return filtersConfig.reduce((acc, filterConfig) => {
+        const key = filterConfig.key;
+        if (Array.isArray(filters[key]) && filters[key].length > 0) {
+          acc[key] = {
+            $in: filters[key],
+          };
+        }
+
+        return acc;
+      }, {});
     },
   }
 );

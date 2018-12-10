@@ -3,3 +3,9 @@
     page-break-before: always;
   }
 }
+
+.unprintable {
+  @media print {
+    display: none;
+  }
+}

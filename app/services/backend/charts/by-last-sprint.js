@@ -1,20 +1,22 @@
 import Mixin from '@ember/object/mixin';
 import math from 'npm:mathjs';
 import arrayUnique from 'jira-stats/utils/array-unique';
+import $ from 'jquery';
+
+const { extend } = $;
 
 export default Mixin.create({
-  async chartMedianWorkRatioByLastSprint() {
+  async chartMedianWorkRatioByLastSprint({ filters } = {}) {
     const { issuesCollection } = await this.ensureCollections();
     const groupedIssues = issuesCollection.find(
-      {
-        status: 'Done',
+      extend({}, this.filtersToQuery(filters), {
         __work_ratio: {
           $exists: true,
         },
         __last_sprint: {
           $exists: true,
         },
-      },
+      }),
       {
         $groupBy: {
           assignee: 1,
@@ -67,18 +69,17 @@ export default Mixin.create({
     return traces;
   },
 
-  async chartMeanWorkRatioByLastSprint() {
+  async chartMeanWorkRatioByLastSprint({ filters } = {}) {
     const { issuesCollection } = await this.ensureCollections();
     const groupedIssues = issuesCollection.find(
-      {
-        status: 'Done',
+      extend({}, this.filtersToQuery(filters), {
         __work_ratio: {
           $exists: true,
         },
         __last_sprint: {
           $exists: true,
         },
-      },
+      }),
       {
         $groupBy: {
           assignee: 1,
@@ -131,18 +132,17 @@ export default Mixin.create({
     return traces;
   },
 
-  async chartMinWorkRatioByLastSprint() {
+  async chartMinWorkRatioByLastSprint({ filters } = {}) {
     const { issuesCollection } = await this.ensureCollections();
     const groupedIssues = issuesCollection.find(
-      {
-        status: 'Done',
+      extend({}, this.filtersToQuery(filters), {
         __work_ratio: {
           $exists: true,
         },
         __last_sprint: {
           $exists: true,
         },
-      },
+      }),
       {
         $groupBy: {
           assignee: 1,
@@ -195,18 +195,17 @@ export default Mixin.create({
     return traces;
   },
 
-  async chartMaxWorkRatioByLastSprint() {
+  async chartMaxWorkRatioByLastSprint({ filters } = {}) {
     const { issuesCollection } = await this.ensureCollections();
     const groupedIssues = issuesCollection.find(
-      {
-        status: 'Done',
+      extend({}, this.filtersToQuery(filters), {
         __work_ratio: {
           $exists: true,
         },
         __last_sprint: {
           $exists: true,
         },
-      },
+      }),
       {
         $groupBy: {
           assignee: 1,

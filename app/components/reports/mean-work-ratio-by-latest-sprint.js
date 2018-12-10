@@ -2,15 +2,20 @@ import Component from '@ember/component';
 import ChartMixin from './chart-mixin';
 import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
+import { observer } from '@ember/object';
+import { next } from '@ember/runloop';
 
 export default Component.extend(ChartMixin, {
   backend: service(),
   chartColors: service(),
 
   fetch: task(function*() {
-    const traces = yield this.backend.chartMeanWorkRatioByLastSprint();
+    const traces = yield this.backend.chartMeanWorkRatioByLastSprint({
+      filters: this.filters,
+    });
 
     if (traces.length === 0) {
+      this.set('plotlyData', undefined);
       return;
     }
 
@@ -70,4 +75,8 @@ export default Component.extend(ChartMixin, {
       yaxis: { title: 'Mean Work Ratio' },
     });
   }).drop(),
+
+  _filtersObserver: observer('filters', function() {
+    next(this.fetch, 'perform');
+  }),
 });

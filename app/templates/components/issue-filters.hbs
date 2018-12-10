@@ -1,0 +1,18 @@
+{{#each filters as |filter|}}<div class="uk-inline uk-margin-small-bottom uk-margin-small-right">
+    <button class="uk-button uk-button-default {{if filter.hasChecked 'uk-button-primary'}}" type="button">{{filter.name}}: {{filter.selectedStr}}</button>
+    <div uk-drop="mode: click">
+      <div class="uk-card uk-card-body uk-card-default">
+        <ul class="uk-list">
+          {{#each filter.selection as |selection|}}
+            <li>
+              <input class="uk-checkbox" type="checkbox"
+                     checked={{selection.checked}}
+                     onchange={{pipe-action
+                (action (mut selection.checked) value="target.checked") (action applyFilters)
+              }}> {{selection.text}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>{{/each}}

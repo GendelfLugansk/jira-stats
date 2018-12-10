@@ -1,20 +1,22 @@
 import Mixin from '@ember/object/mixin';
 import math from 'npm:mathjs';
 import arrayUnique from 'jira-stats/utils/array-unique';
+import $ from 'jquery';
+
+const { extend } = $;
 
 export default Mixin.create({
-  async chartMedianWorkRatioByLabel() {
+  async chartMedianWorkRatioByLabel({ filters } = {}) {
     const { issuesCollection } = await this.ensureCollections();
     const groupedIssues = issuesCollection.find(
-      {
-        status: 'Done',
+      extend({}, this.filtersToQuery(filters), {
         __work_ratio: {
           $exists: true,
         },
         labels: {
           $exists: true,
         },
-      },
+      }),
       {
         $groupBy: {
           assignee: 1,
@@ -65,18 +67,17 @@ export default Mixin.create({
     return traces;
   },
 
-  async chartMeanWorkRatioByLabel() {
+  async chartMeanWorkRatioByLabel({ filters } = {}) {
     const { issuesCollection } = await this.ensureCollections();
     const groupedIssues = issuesCollection.find(
-      {
-        status: 'Done',
+      extend({}, this.filtersToQuery(filters), {
         __work_ratio: {
           $exists: true,
         },
         labels: {
           $exists: true,
         },
-      },
+      }),
       {
         $groupBy: {
           assignee: 1,
@@ -127,18 +128,17 @@ export default Mixin.create({
     return traces;
   },
 
-  async chartMinWorkRatioByLabel() {
+  async chartMinWorkRatioByLabel({ filters } = {}) {
     const { issuesCollection } = await this.ensureCollections();
     const groupedIssues = issuesCollection.find(
-      {
-        status: 'Done',
+      extend({}, this.filtersToQuery(filters), {
         __work_ratio: {
           $exists: true,
         },
         labels: {
           $exists: true,
         },
-      },
+      }),
       {
         $groupBy: {
           assignee: 1,
@@ -189,18 +189,17 @@ export default Mixin.create({
     return traces;
   },
 
-  async chartMaxWorkRatioByLabel() {
+  async chartMaxWorkRatioByLabel({ filters } = {}) {
     const { issuesCollection } = await this.ensureCollections();
     const groupedIssues = issuesCollection.find(
-      {
-        status: 'Done',
+      extend({}, this.filtersToQuery(filters), {
         __work_ratio: {
           $exists: true,
         },
         labels: {
           $exists: true,
         },
-      },
+      }),
       {
         $groupBy: {
           assignee: 1,

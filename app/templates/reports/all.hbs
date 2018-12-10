@@ -3,11 +3,14 @@
 <div id="content" data-uk-height-viewport="expand: true">
   <div class="uk-container uk-container-expand">
 
-    <h3 class="page-break-before">Common</h3>
+    {{issue-filters appliedFilters=parentController.filters onApplyFilters=(action (mut parentController.filters))
+                    class="uk-width-1-1"}}
+
+    <h3>Common</h3>
 
     <div class="uk-grid uk-grid-medium " uk-height-viewport="expand: true" data-uk-grid>
 
-      {{reports/work-ratio-histogram class="uk-width-1-1"}}
+      {{reports/work-ratio-histogram filters=parentController.filters class="uk-width-1-1"}}
 
     </div>
 
@@ -15,13 +18,13 @@
 
     <div class="uk-grid uk-grid-medium " uk-height-viewport="expand: true" data-uk-grid>
 
-      {{reports/median-work-ratio-by-latest-sprint class="uk-width-1-2@xl"}}
+      {{reports/median-work-ratio-by-latest-sprint filters=parentController.filters class="uk-width-1-2@xl"}}
 
-      {{reports/mean-work-ratio-by-latest-sprint class="uk-width-1-2@xl"}}
+      {{reports/mean-work-ratio-by-latest-sprint filters=parentController.filters class="uk-width-1-2@xl"}}
 
-      {{reports/min-work-ratio-by-latest-sprint class="uk-width-1-2@xl"}}
+      {{reports/min-work-ratio-by-latest-sprint filters=parentController.filters class="uk-width-1-2@xl"}}
 
-      {{reports/max-work-ratio-by-latest-sprint class="uk-width-1-2@xl"}}
+      {{reports/max-work-ratio-by-latest-sprint filters=parentController.filters class="uk-width-1-2@xl"}}
 
     </div>
 
@@ -29,13 +32,13 @@
 
     <div class="uk-grid uk-grid-medium " uk-height-viewport="expand: true" data-uk-grid>
 
-      {{reports/median-work-ratio-by-label class="uk-width-1-2@xl"}}
+      {{reports/median-work-ratio-by-label filters=parentController.filters class="uk-width-1-2@xl"}}
 
-      {{reports/mean-work-ratio-by-label class="uk-width-1-2@xl"}}
+      {{reports/mean-work-ratio-by-label filters=parentController.filters class="uk-width-1-2@xl"}}
 
-      {{reports/min-work-ratio-by-label class="uk-width-1-2@xl"}}
+      {{reports/min-work-ratio-by-label filters=parentController.filters class="uk-width-1-2@xl"}}
 
-      {{reports/max-work-ratio-by-label class="uk-width-1-2@xl"}}
+      {{reports/max-work-ratio-by-label filters=parentController.filters class="uk-width-1-2@xl"}}
 
     </div>
 
@@ -43,13 +46,13 @@
 
     <div class="uk-grid uk-grid-medium " uk-height-viewport="expand: true" data-uk-grid>
 
-      {{reports/median-work-ratio-by-labels-combined class="uk-width-1-2@xl"}}
+      {{reports/median-work-ratio-by-labels-combined filters=parentController.filters class="uk-width-1-2@xl"}}
 
-      {{reports/mean-work-ratio-by-labels-combined class="uk-width-1-2@xl"}}
+      {{reports/mean-work-ratio-by-labels-combined filters=parentController.filters class="uk-width-1-2@xl"}}
 
-      {{reports/min-work-ratio-by-labels-combined class="uk-width-1-2@xl"}}
+      {{reports/min-work-ratio-by-labels-combined filters=parentController.filters class="uk-width-1-2@xl"}}
 
-      {{reports/max-work-ratio-by-labels-combined class="uk-width-1-2@xl"}}
+      {{reports/max-work-ratio-by-labels-combined filters=parentController.filters class="uk-width-1-2@xl"}}
 
     </div>
 

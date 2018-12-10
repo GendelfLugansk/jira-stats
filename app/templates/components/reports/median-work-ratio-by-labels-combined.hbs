@@ -10,8 +10,8 @@
         <div class="chart-container" id="{{chartId}}"></div>
       {{else}}
         <p id="{{chartId}}">
-          It seems that you don't have enough issues to build this chart. Maybe you want to {{link-to 'Import'
-                                                                                                      'import'}}?
+          It seems that you don't have enough issues to build this chart. You may need to adjust filters (on top of this
+          page) or {{link-to 'Import' 'import'}} issues.
         </p>
       {{/if}}
     {{else}}
@@ -22,7 +22,7 @@
     {{#if plotlyData.length}}
       <p class="uk-text-meta">
         This chart shows median of Logged Time / Estimated Time, grouped by assignee and combined labels.
-        Only issues with status 'Done' included.
+
       </p>
     {{/if}}
   </div>

@@ -10,7 +10,8 @@ export default Component.extend({
     const issues = yield this.backend.getIssues(
       this.page,
       this.pageSize,
-      this.sort
+      this.sort,
+      this.filters
     );
 
     this.set('issues', issues);

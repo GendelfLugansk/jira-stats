@@ -10,7 +10,6 @@
         <thead>
         <tr>
           <th class="uk-table-middle">{{name-for-key 'issue_key'}}</th>
-          <th class="uk-table-middle">{{name-for-key 'issue_id'}}</th>
           <th class="uk-table-middle">{{name-for-key 'issue_type'}}</th>
           <th class="uk-table-middle">{{name-for-key 'summary'}}</th>
           <th class="uk-table-middle">{{name-for-key 'assignee'}}</th>
@@ -18,7 +17,7 @@
           <th class="uk-table-middle">{{name-for-key 'sprint'}}</th>
           <th class="uk-table-middle">{{name-for-key 'time_spent'}}</th>
           <th class="uk-table-middle">{{name-for-key 'original_estimate'}}</th>
-          <th class="uk-table-middle">{{name-for-key 'work_ratio'}}</th>
+          <th class="uk-table-middle">{{name-for-key '__work_ratio'}}</th>
         </tr>
         </thead>
         <tbody>
@@ -26,7 +25,6 @@
         {{#each this.issues as |issue|}}
           <tr>
             <td>{{issue.issue_key}}</td>
-            <td>{{issue.issue_id}}</td>
             <td>{{issue.issue_type}}</td>
             <td>{{issue.summary}}</td>
             <td>{{issue.assignee}}</td>
@@ -34,7 +32,7 @@
             <td>{{issue.sprint}}</td>
             <td>{{if issue.time_spent (duration-format issue.time_spent) (html '&mdash;')}}</td>
             <td>{{if issue.original_estimate (duration-format issue.original_estimate) (html '&mdash;')}}</td>
-            <td>{{issue.work_ratio}}</td>
+            <td>{{number-format issue.__work_ratio}}</td>
           </tr>
         {{/each}}
         </tbody>
