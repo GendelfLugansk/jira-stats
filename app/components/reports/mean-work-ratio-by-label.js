@@ -73,6 +73,7 @@ export default Component.extend(ChartMixin, {
       ],
       xaxis: { title: 'Label' },
       yaxis: { title: 'Mean Work Ratio' },
+      showlegend: true,
     });
   }).drop(),
 

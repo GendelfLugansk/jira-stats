@@ -73,6 +73,7 @@ export default Component.extend(ChartMixin, {
       ],
       xaxis: { title: 'Label' },
       yaxis: { title: 'Max. Work Ratio' },
+      showlegend: true,
     });
   }).drop(),
 

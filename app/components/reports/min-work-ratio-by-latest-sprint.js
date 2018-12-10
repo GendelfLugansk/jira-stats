@@ -73,6 +73,7 @@ export default Component.extend(ChartMixin, {
       ],
       xaxis: { title: 'Sprint' },
       yaxis: { title: 'Min. Work Ratio' },
+      showlegend: true,
     });
   }).drop(),
 
