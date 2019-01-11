@@ -1,6 +1,11 @@
 # jira-stats
 
-Application to analyze exported JIRA issues
+![screenshot](screenshots/charts_by_sprint.png)
+
+Client-side (no server, IndexDB is used for persisting data) web application to analyze 
+estimate / spent times in exported Jira issues. Written in JS with EmberJS framework. 
+In order to use it, one needs to export issues from Jira and "upload" it into app. Import
+page includes instructions. 
 
 ## Prerequisites
 

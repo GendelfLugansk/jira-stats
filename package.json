@@ -1,8 +1,8 @@
 {
   "name": "jira-stats",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
-  "description": "Small description for jira-stats goes here",
+  "description": "Client-side web application to analyze estimates / logged time in Jira",
   "repository": "",
   "license": "MIT",
   "author": "",
