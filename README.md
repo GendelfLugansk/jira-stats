@@ -2,7 +2,7 @@
 
 ![screenshot](screenshots/charts_by_sprint.png)
 
-Client-side (no server, IndexDB is used for persisting data) web application to analyze 
+Client-side (no server, IndexedDB is used for persisting data) web application to analyze 
 estimate / spent times in exported Jira issues. Written in JS with EmberJS framework. 
 In order to use it, one needs to export issues from Jira and "upload" file into app. Import
 page includes instructions. 

@@ -15,9 +15,9 @@
           </div>
           <div class="uk-card-body">
             <p>This application was built to analyze spent time/estimates logged into Jira.
-              You will need to export your Jira issues in CSV format in order to analyze them</p>
+              You will need to export your Jira issues in CSV format (Import page includes instructions)</p>
 
-            <h4>Performance Concerns</h4>
+            <h4>Performance</h4>
 
             <p>
               Jira Stats is a client-side web application. Because of that, performance depends
@@ -26,15 +26,17 @@
               test it with larger amounts. As a precaution, amount of issues this app will store and process (in total)
               is limited to 50000</p>
 
-            <h4>Data Persistence & Security Concerns</h4>
+            <h4>Data Persistence & Security</h4>
 
-            <p>This application stores your data in your browser, in indexedDB. Therefore, data is accessible
+            <p>This application stores your data in browser, using IndexedDB. Therefore, data is accessible
               to people who can access your PC. If you want to remove all stored data &mdash; click "Drop Database"
-              in "user menu" in left navigation panel</p>
+              in "user menu" in left navigation panel (if it doesn't work - try to reload page in browser)</p>
 
             <p class="uk-text-center">
               {{link-to "Let's begin!" 'import' class="uk-button uk-button-primary uk-button-large"}}
             </p>
+
+            <p><a href="https://github.com/GendelfLugansk/jira-stats" target="_blank">This project on GitHub</a></p>
           </div>
         </div>
       </div>
